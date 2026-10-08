@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programación II — Guía de Estudio (Arduino & PHP)</title>
+<meta name="description" content="Sitio de estudio de Programación II: Sistemas Embebidos con Arduino y Programación Web con PHP, HTML y JavaScript. Basado en las clases de la Tecnicatura en Informática de Gestión.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <button id="menu-toggle" aria-label="Abrir menú">☰ Menú</button>
+  <h1>🚀 Programación II</h1>
+  <span class="subtitle">Guía de estudio · Arduino & PHP · Tecnicatura en Informática de Gestión</span>
+  <button id="theme-toggle" aria-label="Cambiar tema">🌙</button>
+</header>
+
+<div class="layout">
+
+<aside id="sidebar">
+  <input type="search" id="search" placeholder="🔍 Buscar tema (ej: PWM, foreach, MySQL)…" autocomplete="off">
+  <nav id="nav">
+    <div class="nav-group">
+      <h3 class="arduino">🤖 Arduino (Embebidos)</h3>
+      <a href="#intro">📌 Cómo usar esta guía</a>
+      <a href="#a1">1. Sistemas Embebidos<span class="src">Clase 1</span></a>
+      <a href="#a2">2. Tinkercad y el Circuito<span class="src">Clase 2</span></a>
+      <a href="#a3">3. Ley de Ohm · Serie/Paralelo<span class="src">Clase 3</span></a>
+      <a href="#a4">4. Anatomía del Código C++<span class="src">Clases 4-5</span></a>
+      <a href="#a5">5. Salidas Digitales<span class="src">Clase 6</span></a>
+      <a href="#a6">6. Entradas Digitales<span class="src">Clase 7</span></a>
+      <a href="#a7">7. Condicionales e Interrupciones<span class="src">Clase 8</span></a>
+      <a href="#a8">8. Entradas Analógicas (ADC)<span class="src">Clase 9</span></a>
+      <a href="#a9">9. Salidas Analógicas (PWM)<span class="src">Clase 10</span></a>
+      <a href="#a10">10. Comunicación Serie<span class="src">Clase 11</span></a>
+      <a href="#a11">11. Sensor Ultrasonido HC-SR04<span class="src">Clase 12</span></a>
+      <a href="#a12">12. Pantallas LCD 16x2<span class="src">Clase 13</span></a>
+      <a href="#a13">13. Servos y Relés<span class="src">Clase 14</span></a>
+      <a href="#a14">14. Internet de las Cosas (IoT)<span class="src">Clase 15</span></a>
+    </div>
+    <div class="nav-group">
+      <h3 class="php">🐘 PHP (Web)</h3>
+      <a href="#p1">15. Infraestructura Web + HTML<span class="src">Clase HTML/JS</span></a>
+      <a href="#p2">16. JavaScript<span class="src">Clase HTML/JS</span></a>
+      <a href="#p3">17. ¿Qué es PHP?<span class="src">Clase 1 PHP</span></a>
+      <a href="#p4">18. Tipos, Variables y Operadores<span class="src">Clase 1 PHP</span></a>
+      <a href="#p5">19. Sentencias: if, switch, bucles<span class="src">Clase 1 PHP</span></a>
+      <a href="#p6">20. Funciones<span class="src">Clase 2 PHP</span></a>
+      <a href="#p7">21. Matrices (Arrays)<span class="src">Clase 2 PHP</span></a>
+      <a href="#p8">22. Bases de Datos y MySQL<span class="src">Clase 3 PHP</span></a>
+    </div>
+  </nav>
+  <p id="no-results">Sin resultados. Probá con otra palabra.</p>
+</aside>
+
+<main id="content">
+
+<div class="hero">
+  <h2>Bienvenido a tu centro de estudio 🎓</h2>
+  <p>Toda la materia <strong>Programación II</strong> organizada en temas: la rama de <strong style="color:var(--arduino)">Sistemas Embebidos (Arduino)</strong> y la rama de <strong style="color:var(--php)">Programación Web (PHP + HTML + JavaScript)</strong>. Todo el código está copiado de las clases y comentado línea por línea.</p>
+  <div class="chips">
+    <a class="chip a" href="#a1">Empezar por Arduino</a>
+    <a class="chip p" href="#p3">Empezar por PHP</a>
+  </div>
+</div>
+
+<article class="topic" id="intro">
+  <h2>📌 Cómo usar esta guía</h2>
+  <p>Este sitio reúne el contenido de los <strong>19 PDFs de la cursada</strong>, reorganizado por <strong>temas</strong> (no por clase) para que puedas estudiar y repasar justo antes de programar. Cada tema incluye:</p>
+  <ul>
+    <li>🧠 La <strong>teoría resumida y explicada</strong> con las palabras de la cátedra.</li>
+    <li>💻 Los <strong>fragments de código originales de los PDFs</strong> (con sus comentarios). En los 3 casos donde la diapositiva del PDF se corta, se marca claramente la parte completada.</li>
+    <li>📋 Un botón <strong>«Copiar»</strong> en cada bloque de código para llevarlo directo al IDE o a Tinkercad.</li>
+    <li>💬 Las <strong>preguntas del foro</strong> de cada unidad, plegables al final de cada tema (útiles para el parcial).</li>
+  </ul>
+  <div class="note">💡 <strong>Atajos:</strong> usá la <strong>lupa del menú lateral</strong> para buscar cualquier comando (ej: <em>analogWrite</em>, <em>foreach</em>, <em>mysql</em>). El botón 🌙/☀️ cambia entre modo oscuro y claro.</div>
+</article>
+
+<!-- ============================ ARDUINO ============================ -->
+
+<article class="topic arduino" id="a1">
+  <span class="badge arduino">ARDUINO · Clase 1</span>
+  <h2>1. ¿Qué es un Sistema Embebido?</h2>
+
+  <h3>Computación general vs. computación física</h3>
+  <p>Las computadoras estándar (PCs, notebooks, servidores en la nube) son de <strong>propósito general</strong>: ejecutan múltiples tareas en paralelo, interactúan fuertemente con el humano (teclado, mouse, monitor) y su software cambia constantemente según la necesidad operativa diaria.</p>
+  <p>Un <strong>Sistema Embebido</strong> (o empotrado/integrado) es, en cambio, una infraestructura informática <strong>optimizada para cumplir una sola función específica</strong>. Definición operativa de la cátedra:</p>
+  <div class="note">«Es un sistema de computación diseñado para <strong>controlar, monitorear o recibir datos</strong> de una infraestructura física o proceso específico, integrado habitualmente dentro del propio dispositivo que gestiona.»</div>
+
+  <h3>Cuadro comparativo para la gestión</h3>
+  <table>
+    <tr><th>Computación Tradicional</th><th>Sistemas Embebidos</th></tr>
+    <tr><td>Propósito general y multitarea</td><td>Función única y dedicada</td></tr>
+    <tr><td>Interacción directa con humanos</td><td>Interacción con variables del entorno</td></tr>
+    <tr><td>Memoria y procesamiento masivos</td><td>Recursos estrictamente limitados</td></tr>
+    <tr><td>Software modular e intercambiable</td><td>Firmware estático y repetitivo</td></tr>
+  </table>
+
+  <h3>La analogía del rol laboral</h3>
+  <p>Para entender la asignación de recursos en una pyme: una <strong>PC es como un asistente administrativo</strong> (el generalista: liquida sueldos, envía correos, edita videos). Un <strong>sistema embebido es como un operario técnico</strong> (el especialista): está programado para abrir exactamente una válvula cuando la presión pasa de cierto límite, de manera perfecta.</p>
+
+  <h3>Casos reales en gestión</h3>
+  <ul>
+    <li><strong>Controladores de acceso (SUBE / tarjetas):</strong> leen el chip, verifican permisos en las bases de datos y activan molinetes.</li>
+    <li><strong>Climatización inteligente (HVAC):</strong> sensores miden temperatura y regulan compresores para optimizar el gasto de energía.</li>
+    <li><strong>Logística y frenos ABS:</strong> monitorean la rotación de ruedas en camiones de flota para prevenir accidentes.</li>
+  </ul>
+
+  <h3>Arquitectura de todo sistema embebido</h3>
+  <div class="formula">ENTRADAS → PROCESAMIENTO → SALIDAS</div>
+  <ul>
+    <li><strong>Entradas (Sensores):</strong> capturan la realidad (luz, calor, botones).</li>
+    <li><strong>Procesamiento (Microcontrolador):</strong> aplica la regla lógica del negocio.</li>
+    <li><strong>Salidas (Actuadores):</strong> modifican la realidad física (motores, luces, alarmas).</li>
+  </ul>
+
+  <h3>¿Qué es Arduino?</h3>
+  <p>Es una plataforma de <strong>código abierto</strong> basada en hardware y software flexibles: el <strong>hardware</strong> (placa con microcontrolador = cerebro electrónico), el <strong>software</strong> (IDE para escribir y transferir el código) y la <strong>comunidad</strong> (ecosistema global que permite reutilizar librerías).</p>
+
+  <div class="codeblock">
+    <div class="code-head"><span>arduino · esqueleto básico (Clase 1 y 4)</span><button class="copy">📋 Copiar</button></div>
+<pre><code><span class="cmt">// Estructura mínima obligatoria de todo sketch de Arduino</span>
+void setup () {
+  <span class="cmt">// Codigo de configuracion inicial</span>
+  <span class="cmt">// Se ejecuta UNA sola vez al arrancar la placa</span>
+  pinMode (13 , OUTPUT ) ; <span class="cmt">// configura el pin 13 como salida</span>
+}
+
+void loop () {
+  <span class="cmt">// Codigo del bucle continuo</span>
+  <span class="cmt">// Se ejecuta de manera INFINITA mientras haya energia</span>
+  digitalWrite (13 , HIGH ) ; <span class="cmt">// inyecta 5V en el pin 13</span>
+}</code></pre>
+  </div>
+
+  <details class="foro"><summary>💬 Preguntas del foro de la Unidad 1 (PDF)</summary>
+    <ol>
+      <li>¿Cuál es la principal diferencia conceptual entre una computadora de escritorio común y el sistema informático integrado en un ascensor inteligente?</li>
+      <li>Si una pyme necesita automatizar el control de accesos a su depósito, ¿cuáles son las ventajas operativas y económicas de diseñar un sistema embebido específico frente a instalar una PC común en la puerta?</li>
+    </ol>
+  </details>
+</article>
+
+<article class="topic arduino" id="a2">
+  <span class="badge arduino">ARDUINO · Clase 2</span>
+  <h2>2. Tinkercad y la Lógica del Circuito Físico</h2>
+
+  <h3>¿Por qué simulamos en Tinkercad Circuits?</h3>
+  <ul>
+    <li><strong>Costo cero:</strong> permite experimentar con componentes caros sin comprarlos en fases tempranas.</li>
+    <li><strong>Seguridad de activos:</strong> elimina el riesgo de destrucción física por errores de conexión (cortocircuitos).</li>
+    <li><strong>Flexibilidad operativa:</strong> acceso desde cualquier dispositivo con navegador web.</li>
+  </ul>
+  <div class="note warn">⚠️ <strong>Simulación vs. realidad:</strong> en Tinkercad no hay falsos contactos ni caídas de tensión imprevistas; en el mundo real existen humedad, temperatura, desgaste y tolerancias. <strong>Regla de oro:</strong> la simulación valida la lógica del software, pero la implementación final requiere pruebas de campo en hardware físico.</div>
+
+  <h3>El circuito eléctrico: camino cerrado</h3>
+  <p>Es un camino <strong>cerrado y continuo</strong> por el cual se desplazan los electrones (corriente eléctrica). El flujo parte de un polo positivo (5V en Arduino) y <strong>debe retornar obligatoriamente</strong> a un polo negativo (GND o Tierra). Si el camino se interrumpe, el flujo se detiene por completo.</p>
+
+  <h3>Las tres magnitudes fundamentales</h3>
+  <table>
+    <tr><th>Magnitud</th><th>Símbolo</th><th>Qué es</th><th>Unidad</th></tr>
+    <tr><td>Voltaje</td><td>V</td><td>Diferencia de potencial o «presión» eléctrica (Arduino entrega típicamente 5V)</td><td>Voltios (V)</td></tr>
+    <tr><td>Corriente</td><td>I</td><td>Caudal de electrones que circulan por segundo</td><td>Amperios (A)</td></tr>
+    <tr><td>Resistencia</td><td>R</td><td>Oposición física al paso de la corriente</td><td>Ohmios (Ω)</td></tr>
+  </table>
+
+  <h3>La analogía hidráulica 🔧</h3>
+  <ul>
+    <li><strong>Voltaje</strong> = presión del agua (determinada por la altura del tanque). A mayor altura, mayor fuerza potencial.</li>
+    <li><strong>Corriente</strong> = caudal de agua (litros por segundo) que pasa por la tubería.</li>
+    <li><strong>Resistencia</strong> = un estrechamiento intencional del caño (o una canilla entreabierta).</li>
+  </ul>
+  <div class="note">💡 <strong>Por qué es crítica la resistencia:</strong> un LED conectado directo entre 5V y GND se quema instantáneamente por exceso de corriente. Al colocar una resistencia (habitualmente <strong>220 Ω</strong>) limitamos el flujo de electrones a un nivel seguro.</div>
+
+  <h3>El proyecto Blink: ruta de la energía</h3>
+  <div class="formula">Pin Digital de Arduino → Resistencia → LED → Pin GND</div>
+  <p><strong>Componentes:</strong> 1) Placa Arduino Uno (cerebro lógico), 2) Diodo LED (salida visual), 3) Resistencia de 220 Ω (escudo protector). Cuando el programa ordena 5V al pin, el circuito se activa; cuando ordena 0V, el flujo se detiene.</p>
+
+  <details class="foro"><summary>💬 Preguntas del foro de la Unidad 2 (PDF)</summary>
+    <ol>
+      <li>¿Por qué se considera un error crítico conectar un LED directamente entre un pin y GND sin resistencia? Explique con la analogía hidráulica.</li>
+      <li>Analice qué ventajas económicas aporta el uso de simuladores antes de comprar hardware físico.</li>
+    </ol>
+  </details>
+</article>
+
+<article class="topic arduino" id="a3">
+  <span class="badge arduino">ARDUINO · Clase 3</span>
+  <h2>3. Ley de Ohm, Serie/Paralelo y Protoboard</h2>
+
+  <h3>La Ley de Ohm</h3>
+  <div class="formula">V = I × R</div>
+  <ul>
+    <li>Con voltaje fijo (5V), si <strong>aumenta</strong> la resistencia → la corriente <strong>disminuye</strong>.</li>
+    <li>Si la resistencia cae cerca de cero → la corriente se dispara al infinito → <strong>cortocircuito</strong>.</li>
+  </ul>
+
+  <h3>Cálculo práctico: ¿por qué 220 Ω para un LED?</h3>
+  <ul>
+    <li><strong>Datos del LED estándar:</strong> tolera 2V y requiere 0,02 A (20 mA) para brillar seguro.</li>
+    <li><strong>Voltaje de Arduino:</strong> 5V → el voltaje a absorber por la resistencia es 5V − 2V = 3V.</li>
+  </ul>
+  <div class="formula">R = V / I = 3V / 0,02A = 150 Ω (mínimo seguro)</div>
+  <p class="muted">*Se usa 220 Ω comercial porque ofrece un margen extra de seguridad para proteger el microcontrolador.</p>
+
+  <h3>Conexión en Serie vs. Paralelo</h3>
+  <table>
+    <tr><th></th><th>Serie</th><th>Paralelo</th></tr>
+    <tr><td>Corriente (I)</td><td>La misma en todo el camino</td><td>Se divide por cada rama autónoma</td></tr>
+    <tr><td>Resistencias</td><td>Se suman: R<sub>Total</sub> = R1 + R2</td><td>Cada rama es independiente</td></tr>
+    <tr><td>Voltaje</td><td>Se divide entre los componentes</td><td>Todos reciben el mismo 5V</td></tr>
+    <tr><td>Si falla uno…</td><td>Se abre el circuito y TODOS se apagan (luces navideñas viejas)</td><td>Los demás siguen funcionando</td></tr>
+  </table>
+  <div class="note">💡 <strong>Aplicación en gestión:</strong> toda la instalación eléctrica de una oficina se conecta en paralelo, justamente por la independencia operativa.</div>
+
+  <h3>La Protoboard (placa de pruebas)</h3>
+  <ul>
+    <li><strong>Canales de alimentación (bordes):</strong> líneas rojas (+) y azules (−), conectadas en <strong>horizontal</strong>. Distribuyen 5V y GND.</li>
+    <li><strong>Pistas de trabajo (centro):</strong> filas numeradas por letras, conectadas en <strong>vertical</strong>. Aquí se pinchan sensores y actuadores.</li>
+  </ul>
+
+  <h3>Gestión de riesgos: el cortocircuito ⚡</h3>
+  <p>Ocurre cuando 5V toca GND directamente sin pasar por ningún componente: R = 0 Ω → corriente al infinito. En Tinkercad aparece una advertencia; en hardware real la placa se sobrecalienta, el chip se destruye o se quema el puerto USB.</p>
+
+  <details class="foro"><summary>💬 Preguntas del foro de la Unidad 2 - Parte B (PDF)</summary>
+    <ol>
+      <li>Para dos LEDs de un sistema de alarma edilicia, ¿serie o paralelo para que si uno falla el otro siga alertando? Justifique.</li>
+      <li>Si por error reemplazamos la resistencia de 220 Ω por una de 10.000 Ω, ¿el LED brillará más, igual, menos o no encenderá? (usar Ley de Ohm)</li>
+    </ol>
+  </details>
+</article>
+
+<article class="topic arduino" id="a4">
+  <span class="badge arduino">ARDUINO · Clases 4 y 5</span>
+  <h2>4. Anatomía del Código: setup() y loop()</h2>
+
+  <h3>El flujo de lectura lineal y cíclico</h3>
+  <p>Un programa de Arduino (llamado <strong>sketch</strong>) se lee de arriba hacia abajo, línea por línea, de manera rígida. A diferencia de una aplicación web (que permanece inactiva esperando un clic), el <strong>firmware embebido no descansa</strong>: ejecuta sus instrucciones de forma automatizada y vuelve a empezar de inmediato, de manera perpetua.</p>
+
+  <h3>El esqueleto obligatorio</h3>
+  <ul>
+    <li><strong>setup():</strong> bloque de preparación e infraestructura inicial. Se ejecuta <strong>una única vez</strong> al recibir energía o al presionar Reset. Aquí se configuran pines (entradas/salidas) y se abren canales de comunicación.</li>
+    <li><strong>loop():</strong> bloque operativo central. Se ejecuta de manera <strong>infinita y cíclica</strong>: al llegar a la última línea regresa a la primera. Aquí va el monitoreo constante de activos (alarmas, sensores de stock).</li>
+  </ul>
+
+  <div class="codeblock">
+    <div class="code-head"><span>arduino · los dos bloques nativos (Clase 4)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>void setup () {
+  <span class="cmt">// Inicializacion del sistema</span>
+  <span class="cmt">// Configuracion de periferiales</span>
+  pinMode (13 , OUTPUT ) ; <span class="cmt">// el pin 13 sera salida</span>
+}
+
+void loop () {
+  <span class="cmt">// Reglas de negocio repetitivas</span>
+  digitalWrite (13 , HIGH ) ; <span class="cmt">// enciende</span>
+  delay (1000) ;              <span class="cmt">// espera 1 segundo (1000 ms)</span>
+  digitalWrite (13 , LOW ) ;  <span class="cmt">// apaga</span>
+  delay (1000) ;              <span class="cmt">// espera otro segundo</span>
+} <span class="cmt">// al cerrar la llave, el loop vuelve a empezar: parpadeo infinito</span></code></pre>
+  </div>
+
+  <h3>Sintaxis crítica de C++ ⚠️</h3>
+  <table>
+    <tr><th>Regla</th><th>Qué hace</th><th>Error típico</th></tr>
+    <tr><td><strong>Punto y coma (;)</strong></td><td>Cierra cada instrucción, como el punto final de una oración</td><td>Olvidarlo paraliza la compilación</td></tr>
+    <tr><td><strong>Llaves { }</strong></td><td>Delimitan la «zona de influencia» de cada función o bloque</td><td>Dejar una sin cerrar</td></tr>
+    <tr><td><strong>Case sensitivity</strong></td><td>El lenguaje distingue mayúsculas/minúsculas</td><td>Escribir <code>digitalwrite</code> en vez de <code>digitalWrite</code></td></tr>
+    <tr><td><strong>Comentarios //</strong></td><td>El compilador los ignora; sirven para que otros programadores entiendan la lógica (auditoría)</td><td>—</td></tr>
+  </table>
+
+  <details class="foro"><summary>💬 Preguntas del foro de la Unidad 3 (PDF)</summary>
+    <ol>
+      <li>Si un algoritmo de auditoría de stock incluye una lectura de código de barras dentro de setup(), ¿cuántas veces se procesará si el dispositivo queda encendido toda la semana?</li>
+      <li>Explique la diferencia funcional entre los comentarios (//) y las instrucciones terminadas en punto y coma, desde la perspectiva del microcontrolador.</li>
+    </ol>
+  </details>
+</article>
+
+<article class="topic arduino" id="a5">
+  <span class="badge arduino">ARDUINO · Clase 6</span>
+  <h2>5. Salidas Digitales e Interacción Binaria</h2>
+
+  <h3>¿Qué significa «digital»?</h3>
+  <p>El sistema se reduce estrictamente a <strong>dos estados lógicos excluyentes</strong>: no existen matices ni valores intermedios.</p>
+  <table>
+    <tr><th>Estado</th><th>Voltaje</th><th>Lógica</th><th>Binario</th></tr>
+    <tr><td>HIGH (nivel alto)</td><td>5V (presencia de tensión)</td><td>Encendido / Verdadero</td><td>1</td></tr>
+    <tr><td>LOW (nivel bajo)</td><td>0V o masa (ausencia)</td><td>Apagado / Falso</td><td>0</td></tr>
+  </table>
+
+  <h3>Comandos de configuración y escritura</h3>
+  <ul>
+    <li><code>pinMode(numeroPin, OUTPUT)</code> — se declara en <strong>setup()</strong>. Los pines 0 a 13 son de propósito general; OUTPUT le indica al chip que ese pin actuará como <strong>proveedor de energía</strong> hacia el exterior.</li>
+    <li><code>digitalWrite(numeroPin, ESTADO)</code> — se usa en <strong>loop()</strong>. Con HIGH el pin se conecta internamente a la línea de 5V; con LOW, a tierra (GND, 0V).</li>
+  </ul>
+
+  <h3>La gestión del tiempo: delay()</h3>
+  <p>El chip procesa millones de operaciones por segundo: si encendemos y apagamos sin pausa, el ojo humano no nota el cambio. <code>delay()</code> pausa el flujo en <strong>milisegundos</strong> (1 segundo = 1000 ms).</p>
+  <div class="note warn">⚠️ <strong>Efecto secundario clave:</strong> durante el delay el chip queda completamente «congelado». No lee sensores ni procesa otras órdenes.</div>
+
+  <div class="codeblock">
+    <div class="code-head"><span>arduino · control de baliza intermitente (Clase 6)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>void setup () {
+  pinMode (13 , OUTPUT ) ; <span class="cmt">// configura el pin 13 como salida</span>
+}
+
+void loop () {
+  digitalWrite (13 , HIGH ) ; <span class="cmt">// inyecta 5V (enciende baliza)</span>
+  delay (1000) ;              <span class="cmt">// espera 1 segundo</span>
+  digitalWrite (13 , LOW ) ;  <span class="cmt">// corta la tension a 0V (apaga)</span>
+  delay (1000) ;              <span class="cmt">// espera 1 segundo</span>
+}</code></pre>
+  </div>
+  <p class="muted">💡 Ejemplo del foro: para una sirena intermitente rápida (½ segundo ON, ½ OFF) el parámetro de delay() debería ser <strong>500</strong>.</p>
+
+  <details class="foro"><summary>💬 Preguntas del foro de la Unidad 3 - Salidas (PDF)</summary>
+    <ol>
+      <li>Sirena en el pin 8 que suene intermitente (0,5 s encendida / 0,5 s apagada): ¿qué valor exacto deben tener los delay()?</li>
+      <li>¿Qué problema operativo surge con un delay(60000) tras encender el extractor de aire? ¿Qué pasa con la capacidad de respuesta ante una emergencia?</li>
+    </ol>
+  </details>
+</article>
+<article class="topic arduino" id="a6">
+  <span class="badge arduino">ARDUINO · Clase 7</span>
+  <h2>6. Entradas Digitales y Captura del Entorno</h2>
+
+  <h3>La placa como «oyente»</h3>
+  <p>Una <strong>entrada digital</strong> es el camino inverso a la salida: la placa actúa como un <strong>voltímetro digital</strong> que mide constantemente un pin para saber qué ocurre en el exterior. Si un sensor inyecta 5V, el chip interpreta HIGH (1); si el paso de energía se corta a 0V, interpreta LOW (0).</p>
+
+  <h3>Comandos de lectura</h3>
+  <ul>
+    <li><code>pinMode(numeroPin, INPUT)</code> — en setup(). INPUT configura el pin en <strong>alta impedancia</strong>, transformándolo en un sensor interno capaz de detectar voltajes sin alterar el circuito.</li>
+    <li><code>digitalRead(numeroPin)</code> — en loop(). Devuelve un entero: <strong>1</strong> si detectó 5V, <strong>0</strong> si detectó 0V. Buena práctica: guardar el resultado de inmediato en una variable <code>int</code>.</li>
+  </ul>
+
+  <h3>Acoplamiento directo entrada→salida</h3>
+  <p>La forma más elemental de automatización: transferir el estado de una entrada directamente a una salida, como puente de software. Caso práctico de la cátedra: un <strong>pulsador de pánico</strong> en la entrada de la oficina que, al presionarlo (5V), enciende al instante un <strong>reflector de contingencia</strong> exterior.</p>
+
+  <div class="codeblock">
+    <div class="code-head"><span>arduino · transferencia de estados (Clase 7)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>int estadoBoton = 0; <span class="cmt">// variable global para guardar el dato leido</span>
+
+void setup () {
+  pinMode (13 , OUTPUT ) ; <span class="cmt">// pin 13 actuara como salida (LED)</span>
+  pinMode (2 , INPUT ) ;   <span class="cmt">// pin 2 actuara como entrada (Boton)</span>
+}
+
+void loop () {
+  estadoBoton = digitalRead (2) ;    <span class="cmt">// lee la entrada y guarda el dato (1 o 0)</span>
+  digitalWrite (13 , estadoBoton ) ; <span class="cmt">// escribe en la salida el dato guardado</span>
+} <span class="cmt">// el LED replica en vivo lo que hace el boton</span></code></pre>
+  </div>
+
+  <details class="foro"><summary>💬 Preguntas del foro de la Unidad 3 - Entradas (PDF)</summary>
+    <ol>
+      <li>Un sensor perimetral infrarrojo devuelve 5V cuando alguien cruza sin autorización: ¿qué valor numérico registrará la variable de digitalRead()?</li>
+      <li>Si eliminamos la línea digitalWrite(13, estadoBoton);, ¿qué pasa con el LED al presionar el pulsador? ¿El microcontrolador sigue leyendo el botón?</li>
+    </ol>
+  </details>
+</article>
+
+<article class="topic arduino" id="a7">
+  <span class="badge arduino">ARDUINO · Clase 8</span>
+  <h2>7. Toma de Decisiones: if/else e Interrupciones</h2>
+
+  <h3>La estructura condicional if</h3>
+  <p>El sistema adquiere «inteligencia» cuando altera su comportamiento según los datos que recolecta. La estructura <code>if</code> evalúa una condición: si es <strong>verdadera</strong>, ejecuta el bloque entre llaves; si es falsa, ignora esas líneas y continúa hacia abajo.</p>
+  <p>La cláusula <strong>else</strong> («de lo contrario») ejecuta la acción alternativa. Nunca lleva condición propia y funciona de forma <strong>binaria y excluyente</strong>: se ejecuta el if O el else, jamás ambos en el mismo ciclo.</p>
+
+  <h3>Operadores relacionales ⚠️</h3>
+  <table>
+    <tr><th>Operador</th><th>Significado</th><th>Ejemplo</th></tr>
+    <tr><td><code>==</code></td><td>Estricta igualdad (comparación)</td><td><code>if (estado == HIGH)</code></td></tr>
+    <tr><td><code>!=</code></td><td>Distinto de</td><td><code>if (sensor != 0)</code></td></tr>
+    <tr><td><code>&gt;</code> / <code>&lt;</code></td><td>Mayor / menor que (umbrales numéricos)</td><td><code>if (lectura &gt; 700)</code></td></tr>
+  </table>
+  <div class="note warn">⚠️ <strong>Peligro en gestión:</strong> usar un solo signo <code>=</code> es una <em>asignación</em>, no una comparación. Provoca que la condición sea siempre verdadera y rompe el software. Ejemplo de error del foro: <code>if (sensor = LOW)</code> en vez de <code>==</code>.</div>
+
+  <div class="codeblock">
+    <div class="code-head"><span>arduino · automatización de luces por presencia (Clase 8)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>int sensor = 0; <span class="cmt">// variable global para la lectura del sensor</span>
+
+void setup () {
+  pinMode (4 , INPUT ) ;  <span class="cmt">// pin 4: sensor de presencia (entrada)</span>
+  pinMode (12 , OUTPUT ) ; <span class="cmt">// pin 12: luz del pasillo (salida)</span>
+}
+
+void loop () {
+  sensor = digitalRead (4) ; <span class="cmt">// lee el sensor cada ciclo</span>
+  if ( sensor == HIGH ) {          <span class="cmt">// regla: si hay operarios...</span>
+    digitalWrite (12 , HIGH ) ;    <span class="cmt">// ...enciende la luz</span>
+  } else {                         <span class="cmt">// de lo contrario...</span>
+    digitalWrite (12 , LOW ) ;     <span class="cmt">// ...apagala (ahorro energetico)</span>
+  }
+}</code></pre>
+  </div>
+
+  <h3>El problema del Polling</h3>
+  <p>Hasta ahora el Arduino lee sensores por <strong>polling</strong> (encuesta constante dentro del loop). Si la línea 4 tiene un <code>delay(5000)</code>, el sistema queda «ciego» 5 segundos: si un operario presiona el botón de <strong>parada de emergencia</strong> en el segundo 2 del delay, el sistema no se entera y ocurre un accidente.</p>
+
+  <h3>Interrupción por Hardware (Interrupt)</h3>
+  <p>Mecanismo físico que <strong>detiene inmediatamente</strong> la ejecución del código ante un evento externo urgente, sin importar que el chip esté en un delay. Analogía de la cátedra: estás leyendo un informe línea por línea (loop); suena la alarma de incendios (evento externo); congelás tu actividad, evacuás (atención de emergencia) y volvés a la misma palabra donde habías quedado.</p>
+  <ul>
+    <li><strong>Pines habilitados en Arduino Uno:</strong> solo el <strong>pin 2</strong> (Interrupción 0) y el <strong>pin 3</strong> (Interrupción 1).</li>
+    <li><strong>Modos de disparo:</strong> <code>RISING</code> (activa cuando el pin pasa de 0V a 5V, flanco de subida) y <code>FALLING</code> (pasa de 5V a 0V, flanco de bajada).</li>
+  </ul>
+  <div class="codeblock">
+    <div class="code-head"><span>arduino · registro de la interrupción (Clase 8)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>attachInterrupt ( digitalPinToInterrupt (2) , emergencia , RISING ) ;
+<span class="cmt">// Parametro 1: pin fisico a escuchar (pin 2)</span>
+<span class="cmt">// Parametro 2: nombre de la funcion de emergencia a ejecutar</span>
+<span class="cmt">// Parametro 3: modo de disparo electrico (RISING = flanco de subida)</span></code></pre>
+  </div>
+
+  <h3>La ISR (Interrupt Service Routine)</h3>
+  <p>Reglas estrictas de la función que se ejecuta al saltar la alarma:</p>
+  <ul>
+    <li>Debe ser lo más <strong>corta y rápida</strong> posible.</li>
+    <li><strong>No</strong> recibe parámetros ni devuelve valores (void).</li>
+    <li>⚠️ Dentro de una ISR la función <code>delay()</code> <strong>no funciona</strong>: el contador de tiempo interno del chip también se congela.</li>
+  </ul>
+
+  <div class="codeblock">
+    <div class="code-head"><span>arduino · sistema con parada de emergencia (Clase 8)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>void setup () {
+  pinMode (13 , OUTPUT ) ; <span class="cmt">// LED de proceso normal</span>
+  pinMode (8 , OUTPUT ) ;  <span class="cmt">// salida de la alarma de emergencia</span>
+  pinMode (2 , INPUT ) ;   <span class="cmt">// boton de parada de emergencia</span>
+
+  attachInterrupt ( digitalPinToInterrupt (2) , emergencia , RISING ) ;
+  <span class="cmt">// registra la interrupcion: al subir el pin 2 de 0V a 5V se ejecuta emergencia()</span>
+}
+
+void loop () {
+  digitalWrite (13 , HIGH ) ;
+  delay (3000) ; <span class="cmt">// bucle lento... pero la interrupcion responde al instante</span>
+  digitalWrite (13 , LOW ) ;
+  delay (3000) ;
+}</code></pre>
+  </div>
+  <p class="muted">Nota: la función <code>emergencia()</code> (la ISR) aparece como llamada en el PDF; su cuerpo completo está cortado en la diapositiva. En tu práctica, definila como <code>void emergencia() { digitalWrite(8, HIGH); }</code> o similar.</p>
+
+  <details class="foro"><summary>💬 Preguntas del foro de la Unidad 4 (PDF)</summary>
+    <ol>
+      <li>Identifique el error conceptual y de sintaxis en: if (sensor = LOW) { digitalWrite(13, HIGH); }. ¿Qué efecto tendrá en el simulador?</li>
+      <li>¿Por qué el pulsador de parada de seguridad debe implementarse con una interrupción por hardware en lugar de una lectura digital tradicional en el loop()?</li>
+    </ol>
+  </details>
+</article>
+
+<article class="topic arduino" id="a8">
+  <span class="badge arduino">ARDUINO · Clase 9</span>
+  <h2>8. Entradas Analógicas y el ADC</h2>
+
+  <h3>Señales continuas vs. discretas</h3>
+  <p>Hasta ahora trabajamos con lógica binaria (HIGH/LOW), pero las variables críticas de los procesos logísticos y térmicos <strong>no son un 0 o un 1</strong>: la temperatura de una oficina, la presión de una caldera, el nivel de un tanque o la luz exterior cambian suavemente, pasando por un <strong>número infinito de valores intermedios</strong>.</p>
+  <p>Para procesar ese mundo continuo se necesitan dos pasos: 1) el <strong>transductor (sensor)</strong> convierte la variable física (calor) en una variable eléctrica proporcional (un voltaje entre 0V y 5V); 2) la <strong>cuantificación</strong>: el chip convierte ese voltaje analógico en un código numérico binario.</p>
+
+  <h3>El convertidor ADC de 10 bits</h3>
+  <p>El Arduino Uno tiene un <strong>ADC</strong> (Analog-to-Digital Converter) interno que divide la tensión de entrada (0–5V) en «escalones» discretos. Con una resolución de <strong>10 bits</strong> genera 2¹⁰ = <strong>1024 combinaciones</strong>: el voltaje se mapea linealmente a un entero entre <strong>0 y 1023</strong>.</p>
+  <table>
+    <tr><th>Voltaje real en el pin</th><th>Lectura digital (RAM)</th></tr>
+    <tr><td>0,00 V</td><td>0</td></tr>
+    <tr><td>1,25 V</td><td>255</td></tr>
+    <tr><td>2,50 V</td><td>511</td></tr>
+    <tr><td>3,75 V</td><td>767</td></tr>
+    <tr><td>5,00 V</td><td>1023</td></tr>
+  </table>
+  <p class="muted">Los valores intermedios se redondean al escalón más cercano. Precisión por paso: ≈ 4,88 mV.</p>
+
+  <h3>Los pines analógicos A0–A5</h3>
+  <ul>
+    <li>Las señales analógicas <strong>no</strong> se conectan en los pines 0-13: existe un bloque exclusivo etiquetado <strong>ANALOG IN</strong>, con 6 pines (A0 a A5).</li>
+    <li>Ventaja sintáctica: ya vienen configurados como entradas por hardware → <strong>no es obligatorio</strong> declararlos con pinMode().</li>
+    <li><code>analogRead(A0)</code> devuelve un <code>int</code> entre 0 y 1023. Es más lento que digitalRead(): requiere ~100 microsegundos para estabilizar y muestrear.</li>
+  </ul>
+
+  <h3>El potenciómetro como simulador</h3>
+  <p>Resistencia de tres terminales con perilla giratoria: extremo 1 a 5V, extremo 2 a GND, y la <strong>terminal central (señal)</strong> al pin analógico. Al girar la perilla entrega un voltaje limpio y variable entre 0V y 5V — perfecto para practicar antes de cablear sensores industriales.</p>
+
+  <div class="codeblock">
+    <div class="code-head"><span>arduino · lectura y umbral de alarma (Clase 9)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>int lecturaCruda = 0;
+
+void setup () {
+  pinMode (13 , OUTPUT ) ; <span class="cmt">// alerta visual</span>
+}
+
+void loop () {
+  lecturaCruda = analogRead ( A0 ) ; <span class="cmt">// lee el voltaje actual (0 a 1023)</span>
+
+  if ( lecturaCruda &gt; 700) {       <span class="cmt">// umbral critico 700 (aprox 3,4V)</span>
+    digitalWrite (13 , HIGH ) ;    <span class="cmt">// dispara contingencia</span>
+  } else {
+    digitalWrite (13 , LOW ) ;     <span class="cmt">// operacion normal</span>
+  }
+}</code></pre>
+  </div>
+
+  <details class="foro"><summary>💬 Preguntas del foro de la Unidad 5 (PDF)</summary>
+    <ol>
+      <li>Un sensor entrega exactamente 2,5 V a 25 °C: ¿qué número entero devolverá analogRead()? Calcule el valor exacto.</li>
+      <li>¿Por qué una entrada digital ON/OFF es insuficiente para monitorear el nivel de combustible de una flota de camiones?</li>
+    </ol>
+  </details>
+</article>
+
+<article class="topic arduino" id="a9">
+  <span class="badge arduino">ARDUINO · Clase 10</span>
+  <h2>9. Salidas Analógicas Simuladas (PWM)</h2>
+
+  <h3>La limitación física de las salidas</h3>
+  <p>Los pines de salida son estrictamente binarios: solo entregan de forma real <strong>0V (LOW) o 5V (HIGH)</strong>. El hardware no puede generar tensiones intermedias. Pero en gestión necesitamos graduar: el extractor de HVAC a velocidad proporcional a la temperatura, o las luces de oficina atenuadas según la luz solar.</p>
+
+  <h3>El principio PWM (Pulse Width Modulation)</h3>
+  <p>La solución sin hardware caro: <strong>encender y apagar el pin a alta velocidad</strong> (~500 veces por segundo). El actuador (motor, LED) no llega a apagarse por su propia <strong>inercia</strong> y experimenta un <strong>voltaje promedio ponderado</strong>, simulando una señal analógica real.</p>
+
+  <h3>El Ciclo de Trabajo (Duty Cycle)</h3>
+  <p>Proporción de tiempo que el pulso permanece encendido frente al ciclo total:</p>
+  <table>
+    <tr><th>Ciclo de trabajo</th><th>Comportamiento</th><th>Voltaje equivalente</th></tr>
+    <tr><td>0 %</td><td>El pin está todo el tiempo en 0V</td><td>0 V</td></tr>
+    <tr><td>50 %</td><td>La mitad del tiempo en 5V, la otra mitad en 0V</td><td>2,5 V</td></tr>
+    <tr><td>100 %</td><td>El pin está todo el tiempo en 5V</td><td>5 V</td></tr>
+  </table>
+
+  <h3>Pines habilitados y resolución de 8 bits</h3>
+  <ul>
+    <li>Solo los pines marcados con el símbolo <strong>∼</strong> soportan PWM en el Uno: <strong>3, 5, 6, 9, 10 y 11</strong>. Si lo aplicamos en un pin sin ∼ (ej: pin 7), se comporta como salida digital común.</li>
+    <li>Resolución de <strong>8 bits</strong> → 2⁸ = <strong>256 valores</strong>: el rango va de <strong>0</strong> (0 %, apagado) a <strong>255</strong> (100 %, potencia máxima). Comparado con el ADC de entrada (10 bits, 0-1023).</li>
+    <li><code>analogWrite(numeroPin, valorPotencia)</code>: los pines PWM tampoco requieren pinMode() obligatoria.</li>
+  </ul>
+
+  <div class="codeblock">
+    <div class="code-head"><span>arduino · control de intensidad gradual (Clase 10)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>int brillo = 0;
+
+void setup () {
+  <span class="cmt">// Los pines PWM no requieren configuracion mandatoria</span>
+}
+
+void loop () {
+  analogWrite (9 , brillo ) ; <span class="cmt">// modifica la potencia del pulso (0-255)</span>
+  brillo = brillo + 5;        <span class="cmt">// incrementa la intensidad gradualmente</span>
+
+  if ( brillo &gt; 255) {        <span class="cmt">// al superar el maximo de 8 bits...</span>
+    brillo = 0;               <span class="cmt">// ...resetea el ciclo (efecto respiracion)</span>
+  }
+}</code></pre>
+  </div>
+  <p class="muted">💡 Ejemplo del foro: para un motor al 25 % de potencia, el valor exacto del segundo parámetro es <strong>63 o 64</strong> (255 × 0,25 ≈ 63,75).</p>
+
+  <details class="foro"><summary>💬 Preguntas del foro de la Unidad 5 - PWM (PDF)</summary>
+    <ol>
+      <li>Motor extractor al 25 % en el pin 6: ¿qué valor entero exacto va en analogWrite()?</li>
+      <li>Explique la diferencia de resolución de bits y rangos numéricos entre analogRead() y analogWrite().</li>
+    </ol>
+  </details>
+</article>
+
+<article class="topic arduino" id="a10">
+  <span class="badge arduino">ARDUINO · Clase 11</span>
+  <h2>10. Comunicación Serie y Depuración</h2>
+
+  <h3>La necesidad de visibilidad</h3>
+  <p>Nuestros circuitos eran «mudos»: solo sabíamos si el software funcionaba por el encendido de un LED. El administrador de TI no puede adivinar qué valor exacto procesa la RAM: hay que <strong>extraer la información interna del chip</strong> hacia un panel legible para humanos.</p>
+
+  <h3>El protocolo UART</h3>
+  <p>Arduino usa <strong>UART</strong> (Universal Asynchronous Receiver-Transmitter) o puerto serie: los bits viajan <strong>en fila, uno detrás del otro</strong>, por un único hilo. En hardware real se usan los cables TX (transmisión) y RX (recepción); en Tinkercad y laboratorio todo viaja por el mismo <strong>cable USB</strong> que alimenta la placa.</p>
+
+  <h3>Comandos clave</h3>
+  <table>
+    <tr><th>Comando</th><th>Función</th></tr>
+    <tr><td><code>Serial.begin(9600)</code></td><td>Activa el puerto serie en setup(). El parámetro es la velocidad en <strong>Baudios</strong> (bits/seg). Estándar: 9600. Placa y PC deben usar la MISMA velocidad o llegan caracteres corruptos.</td></tr>
+    <tr><td><code>Serial.print(x)</code></td><td>Envía el dato de forma continua: lo próximo sale al lado, en la misma línea.</td></tr>
+    <tr><td><code>Serial.println(x)</code></td><td>Envía el dato + un salto de línea («Enter» invisible): lo próximo sale abajo.</td></tr>
+  </table>
+
+  <h3>El Monitor Serie</h3>
+  <p>Ventana de consola integrada en el IDE y en la esquina inferior del panel de código de Tinkercad. Muestra cronológicamente los strings y números que la placa transmite en tiempo real. Es la herramienta por excelencia del <strong>Debugging</strong> (detección de fallas lógicas).</p>
+  <div class="note warn">⚠️ <strong>Buena práctica de telemetría:</strong> no imprimas dentro del loop sin freno de tiempo — el chip enviaría datos miles de veces por segundo, saturaría el monitor y volvería ilegible la lectura. Toda impresión de diagnóstico debe acompañarse de un delay() prudencial.</div>
+
+  <div class="codeblock">
+    <div class="code-head"><span>arduino · telemetría de sensor analógico (Clase 11)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>int valorSensor = 0;
+
+void setup () {
+  Serial . begin (9600) ; <span class="cmt">// abre canal de comunicacion a 9600 bps</span>
+}
+
+void loop () {
+  valorSensor = analogRead ( A0 ) ; <span class="cmt">// lee entrada analogica</span>
+
+  Serial . print ( " El nivel actual es : " ) ; <span class="cmt">// texto en la misma linea</span>
+  Serial . println ( valorSensor ) ;            <span class="cmt">// imprime valor con salto de linea</span>
+
+  delay (500) ; <span class="cmt">// espacia el muestreo (2 lecturas por segundo) para el auditor</span>
+}</code></pre>
+  </div>
+
+  <details class="foro"><summary>💬 Preguntas del foro de la Unidad 6 (PDF)</summary>
+    <ol>
+      <li>Placa configurada a 9600 baudios pero el monitor de la PC abierta a 115200: ¿qué observará el operador y por qué?</li>
+      <li>Explique el concepto de «Depuración de Software» (Debugging) y por qué es competencia crítica de un analista que audita código de terceros.</li>
+    </ol>
+  </details>
+</article>
+
+<article class="topic arduino" id="a11">
+  <span class="badge arduino">ARDUINO · Clase 12</span>
+  <h2>11. Sensor de Ultrasonido HC-SR04</h2>
+
+  <h3>El principio del eco</h3>
+  <p>Para medir distancias en logística (nivel de un silo de granos, stock de estanterías) se usa el <strong>HC-SR04</strong>. Imita la ecolocalización de los murciélagos: emite una ráfaga de ondas sonoras de alta frecuencia (inaudibles) y mide <strong>cuánto tiempo tarda la onda en chocar contra un objeto y regresar</strong>.</p>
+
+  <h3>Pines del componente</h3>
+  <table>
+    <tr><th>Pin</th><th>Rol</th></tr>
+    <tr><td>VCC</td><td>Alimentación de energía (5V)</td></tr>
+    <tr><td>GND</td><td>Tierra común (0V)</td></tr>
+    <tr><td>Trigger (Disparador)</td><td><strong>Entrada</strong> digital: recibe del Arduino la orden de lanzar la ráfaga de ultrasonido</td></tr>
+    <tr><td>Echo (Receptor)</td><td><strong>Salida</strong> digital: avisa al Arduino el tiempo que duró el viaje de la onda</td></tr>
+  </table>
+
+  <h3>Protocolo de activación del Trigger</h3>
+  <ol>
+    <li>Asegurar que el pin esté apagado (LOW).</li>
+    <li>Inyectar tensión (HIGH) durante exactamente <strong>10 microsegundos</strong>.</li>
+    <li>Volver a apagar el pin (LOW).</li>
+  </ol>
+  <p>Ese pulso le indica al sensor que despache 8 pulsos de ultrasonido a 40 kHz. Luego el pin <strong>Echo</strong> pasa a HIGH y permanece encendido hasta recibir el eco: medimos esa duración con la función nativa <code>pulseIn(pinEcho, HIGH)</code>, que guarda el tiempo en microsegundos en una variable <code>long</code>.</p>
+
+  <h3>De microsegundos a centímetros</h3>
+  <p>El sonido viaja a ≈ <strong>343 m/s</strong> = <strong>0,0343 cm/microsegundo</strong>. Como Distancia = Velocidad × Tiempo, y la onda hace el viaje de ida Y vuelta, hay que <strong>dividir por 2</strong>:</p>
+  <div class="formula">Distancia = (Tiempo × 0,0343) / 2 ≈ Tiempo / 58,3</div>
+
+  <div class="codeblock">
+    <div class="code-head"><span>arduino · medidor de distancia (Clase 12)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>int pinTrigger = 9;
+int pinEcho = 10;
+long duracion = 0;   <span class="cmt">// pulseIn devuelve microsegundos: hace falta tipo long</span>
+int distancia = 0;
+
+void setup () {
+  Serial . begin (9600) ;
+  pinMode ( pinTrigger , OUTPUT ) ; <span class="cmt">// Trigger: pin de salida (ordena el disparo)</span>
+  pinMode ( pinEcho , INPUT ) ;     <span class="cmt">// Echo: pin de entrada (mide el retorno)</span>
+}
+
+void loop () {
+  digitalWrite ( pinTrigger , LOW ) ;
+  delayMicroseconds (2) ;           <span class="cmt">// garantiza el pin apagado antes del pulso</span>
+  digitalWrite ( pinTrigger , HIGH ) ;
+  <span class="cmt">// (en la practica: mantener HIGH 10 microsegundos con delayMicroseconds(10)</span>
+  <span class="cmt">//  y luego volver a LOW — la diapositiva del PDF se corta aqui)</span>
+}</code></pre>
+  </div>
+  <p class="muted">⚠️ La diapositiva 9-10 del PDF está cortada: termina en <code>digitalWrite(pinTrigger, HIGH);</code>. El patrón completo del protocolo visto en la teoría es: HIGH 10 µs → LOW → <code>duracion = pulseIn(pinEcho, HIGH);</code> → <code>distancia = duracion / 58,3;</code> → imprimir por Serial. El bloque de cierre (Evaluación y Cierre) no aporta más líneas de código.</p>
+
+  <details class="foro"><summary>💬 Preguntas del foro de la Unidad 7 (PDF)</summary>
+    <ol>
+      <li>Si pulseIn() registra 5830 microsegundos, aplique la ecuación para calcular la distancia al obstáculo. Muestre el desglose (5830 / 58,3 = 100 cm).</li>
+      <li>¿Por qué NO conviene el ultrasonido si se requiere auditar milimétrica y velocísimamente la posición de componentes internos de un procesador?</li>
+    </ol>
+  </details>
+</article>
+
+<article class="topic arduino" id="a12">
+  <span class="badge arduino">ARDUINO · Clase 13</span>
+  <h2>12. Pantallas LCD 16x2 (Interfaces HMI)</h2>
+
+  <h3>¿Por qué una pantalla local?</h3>
+  <p>El Monitor Serie ata al microcontrolador a una PC por USB. Si diseñamos un dispositivo portátil o un panel para un depósito aislado, el operario necesita ver alarmas, stocks o mediciones <strong>in situ</strong>: las pantallas LCD (Interfaces Hombre-Máquina, HMI) resuelven esa necesidad.</p>
+
+  <h3>La pantalla LCD 16x2</h3>
+  <ul>
+    <li>Controlador estándar industrial: chip <strong>HD44780</strong>.</li>
+    <li><strong>16 columnas × 2 filas</strong> = hasta 32 caracteres simultáneos.</li>
+    <li>Cada carácter es una matriz de <strong>5 × 8 puntos</strong>; incluye luz de fondo (Backlight) controlable.</li>
+  </ul>
+
+  <h3>Librerías: abstracción de hardware</h3>
+  <p>Encender un píxel a mano exigiría comandos binarios complejos por 8 hilos en paralelo. Una <strong>Librería</strong> es un paquete de código empaquetado por expertos que resuelve las interacciones de bajo nivel y nos expone comandos simples. Para LCD usamos la librería oficial nativa <strong>LiquidCrystal.h</strong>.</p>
+
+  <h3>Comandos esenciales</h3>
+  <table>
+    <tr><th>Comando</th><th>Función</th></tr>
+    <tr><td><code>#include &lt;LiquidCrystal.h&gt;</code></td><td>Invoca la librería en la línea 1 del archivo</td></tr>
+    <tr><td><code>LiquidCrystal lcd(RS, E, D4, D5, D6, D7)</code></td><td>Instancia el objeto indicando los pines; el orden debe coincidir IDÉNTICAMENTE con el cableado físico</td></tr>
+    <tr><td><code>lcd.begin(16, 2)</code></td><td>En setup(): informa las dimensiones físicas (como Serial.begin)</td></tr>
+    <tr><td><code>lcd.setCursor(col, fila)</code></td><td>Posiciona el cursor invisible. Indexación <strong>base cero</strong>: columnas 0-15, filas 0 (superior) y 1 (inferior)</td></tr>
+    <tr><td><code>lcd.print("Texto")</code></td><td>Imprime texto o variables numéricas en la posición actual</td></tr>
+    <tr><td><code>lcd.clear()</code></td><td>Borra todo y regresa el cursor a (0,0)</td></tr>
+  </table>
+  <div class="note warn">⚠️ No ejecutes lcd.clear() dentro del loop sin delay: causará un parpadeo violento y molesto para los ojos del usuario.</div>
+
+  <div class="codeblock">
+    <div class="code-head"><span>arduino · sistema de mensajería local (Clase 13)</span><button class="copy">📋 Copiar</button></div>
+<pre><code># include &lt; LiquidCrystal .h &gt;   <span class="cmt">// invoca la libreria oficial de pantallas LCD</span>
+
+LiquidCrystal lcd (12 , 11 , 5 , 4 , 3 , 2) ; <span class="cmt">// instancia: pines RS,E,D4,D5,D6,D7</span>
+int ciclos = 0;                              <span class="cmt">// contador de ciclos del loop</span>
+
+void setup () {
+  lcd . begin (16 , 2) ;        <span class="cmt">// indica 16 columnas y 2 filas</span>
+  lcd . setCursor (0 , 0) ;     <span class="cmt">// cursor al inicio de la primera fila</span>
+  lcd . print ( " SISTEMA OK " ) ; <span class="cmt">// mensaje estatico de estado</span>
+}
+
+void loop () {
+  lcd . setCursor (0 , 1) ;     <span class="cmt">// se posiciona al inicio de la segunda fila</span>
+  lcd . print ( " Ciclos : " ) ;
+  lcd . print ( ciclos ) ;      <span class="cmt">// imprime la variable dinamica del contador</span>
+  <span class="cmt">// (la diapositiva se corta aqui; para que el contador avance agregue:</span>
+  <span class="cmt">//  ciclos = ciclos + 1;  delay(1000); )</span>
+}</code></pre>
+  </div>
+
+  <details class="foro"><summary>💬 Preguntas del foro de la Unidad 8 (PDF)</summary>
+    <ol>
+      <li>Si ejecutamos lcd.setCursor(16, 0);, ¿qué sucederá con el texto impreso después? ¿Se visualizará correctamente? (justifique con los límites del hardware)</li>
+      <li>Proponga un escenario donde una LCD local sea críticamente superior al Monitor Serie por USB.</li>
+    </ol>
+  </details>
+</article>
+
+<article class="topic arduino" id="a13">
+  <span class="badge arduino">ARDUINO · Clase 14</span>
+  <h2>13. Actuadores de Potencia: Servos y Relés</h2>
+
+  <h3>Servomotor: posicionamiento angular de precisión</h3>
+  <p>A diferencia de un motor DC común (que gira sin parar al recibir energía), un <strong>servomotor</strong> se mueve hacia un <strong>ángulo exacto</strong> y se sostiene firme en esa posición. Rango estándar de prototipado (SG90): <strong>0 a 180 grados</strong>. Internamente tiene motor + caja reductora de engranajes + sensor de posición (potenciómetro) que retroalimenta al circuito.</p>
+  <p><strong>Aplicación empresarial:</strong> barreras de parking automáticas, cerraduras digitales, direccionamiento de cintas transportadoras.</p>
+  <table>
+    <tr><th>Cable del servo</th><th>Conexión</th></tr>
+    <tr><td>Marrón o Negro</td><td>Tierra (GND)</td></tr>
+    <tr><td>Rojo</td><td>Alimentación positiva (5V)</td></tr>
+    <tr><td>Naranja o Amarillo</td><td>Línea de señal de control</td></tr>
+  </table>
+
+  <h3>Librería Servo.h y sus métodos</h3>
+  <ul>
+    <li><code>miServo.attach(pin)</code> — en setup(): indica en qué pin está conectado el hilo de señal (ej: pin 9).</li>
+    <li><code>miServo.write(grados)</code> — en loop(): envía el motor a una posición exacta (entero entre 0 y 180).</li>
+  </ul>
+
+  <div class="codeblock">
+    <div class="code-head"><span>arduino · barrera de peaje con servo (Clase 14)</span><button class="copy">📋 Copiar</button></div>
+<pre><code># include &lt; Servo .h &gt;   <span class="cmt">// libreria oficial para servomotores</span>
+
+Servo barrera ;          <span class="cmt">// instancia el objeto servo
+
+void setup () {
+  barrera . attach (9) ; <span class="cmt">// el hilo de senal del motor esta en el pin 9</span>
+}
+
+void loop () {
+  barrera . write (90) ; <span class="cmt">// abre la barrera: 90 grados exactos</span>
+  delay (3000) ;         <span class="cmt">// la sostiene abierta 3 segundos</span>
+
+  barrera . write (0) ;  <span class="cmt">// cierra la barrera: vuelve a 0 grados</span>
+  delay (3000) ;         <span class="cmt">// espera 3 segundos y repite el ciclo</span>
+}</code></pre>
+  </div>
+
+  <h3>El Relé: el puente hacia la alta tensión ⚡</h3>
+  <div class="note warn">⚠️ <strong>Restricción crítica:</strong> un pin de Arduino solo tolera 20-40 miliamperios a 5V. Conectar directo un motor industrial, una luminaria de 220V o una bomba de agua <strong>quema el chip instantáneamente</strong> y puede provocar un cortocircuito severo.</div>
+  <p>Un <strong>Relé</strong> es un interruptor operado magnéticamente que <strong>separa físicamente</strong> el circuito de control (baja potencia) del circuito de potencia (alta tensión): el <strong>aislamiento galvánico</strong>. Del lado Arduino, al recibir un HIGH (5V) una bobina (electroimán) se magnetiza y atrae un contacto metálico; del lado maquinaria, los contactos actúan como una llave de luz común que abre o cierra los 220V externos, totalmente aislados.</p>
+
+  <h3>Bornes de salida del relé</h3>
+  <table>
+    <tr><th>Borne</th><th>Comportamiento</th><th>Ideal para</th></tr>
+    <tr><td><strong>COM</strong> (Común)</td><td>Ingresa la fase eléctrica externa (220V)</td><td>—</td></tr>
+    <tr><td><strong>NO / NA</strong> (Normalmente Abierto)</td><td>Circuito cortado por defecto; al activar el pin, el relé CIERRA y la máquina recibe energía</td><td>Alarmas, luces</td></tr>
+    <tr><td><strong>NC</strong> (Normalmente Cerrado)</td><td>Conectado por defecto; al activar el pin, el relé ABRE y corta la energía</td><td>Sistemas de refrigeración</td></tr>
+  </table>
+  <p>Como el relé se activa mediante un optoacoplador digital común, se programa con el estándar <code>digitalWrite()</code>:</p>
+
+  <div class="codeblock">
+    <div class="code-head"><span>arduino · control de relé por software (Clase 14)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>int pinRele = 7;
+
+void setup () {
+  pinMode ( pinRele , OUTPUT ) ; <span class="cmt">// el pin 7 comandara la bobina del rele</span>
+}
+
+void loop () {
+  digitalWrite ( pinRele , HIGH ) ; <span class="cmt">// activa el electroiman: cierra el contacto</span>
+  delay (5000) ;                    <span class="cmt">// la carga externa queda energizada 5 s</span>
+
+  digitalWrite ( pinRele , LOW ) ;  <span class="cmt">// libera la bobina: abre el contacto</span>
+  delay (5000) ;                    <span class="cmt">// la carga externa queda apagada 5 s</span>
+}</code></pre>
+  </div>
+
+  <details class="foro"><summary>💬 Preguntas del foro de la Unidad 9 (PDF)</summary>
+    <ol>
+      <li>Describa la diferencia de comportamiento físico entre un motor DC tradicional y un servomotor al recibir una orden de software.</li>
+      <li>Como Administrador de Infraestructura Informática, explique el riesgo operativo y técnico de omitir el relé al automatizar reflectores halógenos exteriores de una sucursal.</li>
+    </ol>
+  </details>
+</article>
+
+<article class="topic arduino" id="a14">
+  <span class="badge arduino">ARDUINO · Clase 15</span>
+  <h2>14. Internet de las Cosas (IoT)</h2>
+
+  <h3>El paradigma IoT</h3>
+  <p>Hasta ahora los sistemas embebidos operaban aislados (<em>Edge</em>). El <strong>IoT</strong> consiste en dotar a los objetos cotidianos e industriales de <strong>conectividad de red</strong>. El valor para la gestión no es el hardware en sí, sino <strong>recopilar telemetría masiva en tiempo real</strong>, centralizarla en servidores remotos y optimizar costos operativos y logísticos.</p>
+
+  <h3>Las tres capas de un sistema IoT</h3>
+  <ol>
+    <li><strong>Capa de Percepción (Hardware):</strong> sensores y microcontrolador (Arduino) que capturan la realidad física.</li>
+    <li><strong>Capa de Red (Conectividad):</strong> routers, antenas WiFi o módems celulares que transportan los bits.</li>
+    <li><strong>Capa de Aplicación (Nube):</strong> servidores y bases de datos que procesan la información y la muestran en Dashboards.</li>
+  </ol>
+
+  <h3>Protocolos ligeros: MQTT</h3>
+  <p>Una PC usa protocolos pesados (HTTP) para cargar páginas web, pero un microcontrolador tiene <strong>RAM muy limitada</strong> y no puede procesar HTML masivo. Necesita protocolos de bajo consumo: el estándar IoT por excelencia es <strong>MQTT</strong> (Message Queuing Telemetry Transport), basado en el modelo de <strong>Publicación y Suscripción</strong> mediante un servidor central (Broker).</p>
+  <p><strong>Hardware de conectividad:</strong> Shield Ethernet W5100 (puerto de red RJ45) o los módulos <strong>ESP8266 / ESP32</strong> — el estándar actual: chips económicos con WiFi nativo y pila TCP/IP.</p>
+
+  <h3>El formato JSON y las plataformas</h3>
+  <p>Para enviar datos a la nube de forma ordenada se usa <strong>JSON</strong> (JavaScript Object Notation), texto plano muy ligero:</p>
+  <div class="formula">{ "sensor_id": "Silo_A", "nivel": 78 }</div>
+  <p><strong>Plataformas de visualización:</strong> ThingSpeak (analítica de sensores abierta), Blynk / Adafruit IO (apps móviles con botones y gráficos arrastrando componentes).</p>
+
+  <div class="codeblock">
+    <div class="code-head"><span>arduino · serialización y envío de métricas (Clase 15)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>int pinSensor = A0 ;
+int lecturaDato = 0;
+
+void setup () {
+  Serial . begin (9600) ; <span class="cmt">// canal serie para simular el envio a la nube</span>
+}
+
+void loop () {
+  lecturaDato = analogRead ( pinSensor ) ; <span class="cmt">// captura del sensor logistico</span>
+
+  <span class="cmt">// Envio de metricas espaciado cada 10 segundos:</span>
+  <span class="cmt">// la placa "simula" una peticion HTTP POST con cuerpo JSON</span>
+  Serial . print ( " POST / api / v1 / metricas HTTP /1.1\ r \ n " ) ;
+  Serial . print ( " Host : data . empresa . com \ r \ n " ) ;
+  Serial . print ( " Content - Type : application / json \ r \ n " ) ;
+  Serial . print ( " Data : {\" valor \": " ) ;
+  Serial . print ( lecturaDato ) ;
+  <span class="cmt">// (la diapositiva se corta aqui; el cierre seria: Serial.print("}");</span>
+  <span class="cmt">//  seguido de un delay(10000) para espaciar el envio cada 10 s)</span>
+}</code></pre>
+  </div>
+
+  <details class="foro"><summary>💬 Preguntas del foro de la Unidad 10 (PDF)</summary>
+    <ol>
+      <li>¿Por qué el protocolo HTTP estándar resulta ineficiente e inadecuado para miles de microcontroladores alimentados por baterías en un campo agrícola?</li>
+      <li>Diseñe un esquema conceptual de IoT para una empresa de transporte de alimentos congelados que garantice no romper la cadena de frío, usando los componentes vistos en el cuatrimestre.</li>
+    </ol>
+  </details>
+</article>
+<!-- ============================ PHP ============================ -->
+
+<article class="topic php" id="p1">
+  <span class="badge php">PHP · Clase HTML/JS</span>
+  <h2>15. Infraestructura Web y HTML</h2>
+
+  <h3>Cómo funciona la Web: los 5 pasos</h3>
+  <p>La visualización de una página comienza al teclear la URL o seguir un hipervínculo; el navegador inicia una serie de comunicaciones transparentes para el usuario:</p>
+  <ol>
+    <li><strong>DNS:</strong> se traduce el nombre del servidor de la URL en una <strong>dirección IP</strong> usando la base de datos distribuida de Internet. Sin la IP no se puede contactar al servidor ni enviarle paquetes.</li>
+    <li><strong>Petición HTTP:</strong> el navegador solicita el recurso. Primero pide el texto HTML y, al analizarlo, hace peticiones adicionales por los gráficos y otros ficheros de la página. Las estadísticas de un sitio se basan en «páginas vistas» o «peticiones de servidor».</li>
+    <li><strong>Renderizado:</strong> al recibir los ficheros, el navegador renderiza la página según el HTML, el CSS y otros lenguajes; al final incorpora imágenes y recursos para producir la pantalla final.</li>
+    <li><strong>Hiperenlaces:</strong> la mayoría de las páginas contienen enlaces a otras páginas, descargas, documentos fuente y otros recursos.</li>
+    <li><strong>La Web:</strong> esta colección de recursos interconectados por hipertexto es la «red de información» que Tim Berners-Lee llamó <em>WorldWideWeb</em> en 1990.</li>
+  </ol>
+
+  <h3>HTML: definición</h3>
+  <p><strong>HTML (HyperText Markup Language)</strong> es un lenguaje de etiquetado que permite escribir páginas Web. Es muy sencillo de usar; permite describir <strong>hipertexto</strong> (texto presentado como enlaces a otros documentos) y referenciar objetos multimedia. La descripción especifica la <strong>estructura lógica del contenido</strong> (títulos, párrafos, enumeraciones, citas) y los efectos deseados, dejando la presentación final al navegador. Todo se maneja mediante <strong>etiquetas o tags</strong>: palabras reservadas encerradas entre ángulos <code>&lt;etiqueta&gt;</code>.</p>
+
+  <h3>Tags principales</h3>
+  <table>
+    <tr><th>Tag</th><th>Función</th></tr>
+    <tr><td><code>&lt;HTML&gt;</code></td><td>Define el ámbito del documento: primer tag <code>&lt;HTML&gt;</code>, último <code>&lt;/HTML&gt;</code>. Sus dos secciones clave son <code>&lt;HEAD&gt;</code> y <code>&lt;BODY&gt;</code>.</td></tr>
+    <tr><td><code>&lt;HEAD&gt;</code></td><td>Cabecera del documento. Contiene <code>&lt;TITLE&gt;</code> (título, solo tiene sentido aquí) y <code>&lt;META&gt;</code> (metainformación: «información acerca de la información»).</td></tr>
+    <tr><td><code>&lt;BODY&gt;</code></td><td>Sección que contiene todo lo que el navegador mostrará.</td></tr>
+    <tr><td><code>&lt;P&gt;</code></td><td>Comienzo de un párrafo nuevo (interpretado como dos saltos de carro).</td></tr>
+    <tr><td><code>&lt;BR&gt;</code></td><td>Salto de carro simple dentro del mismo párrafo.</td></tr>
+    <tr><td><code>&lt;EM&gt;</code></td><td>Énfasis.</td></tr>
+    <tr><td><code>&lt;Hn&gt;</code></td><td>Encabezado o título: el navegador asigna tamaño de fuente según el número (entre 1 y 6).</td></tr>
+    <tr><td><code>&lt;A&gt;</code> (anchor)</td><td>«La piedra angular de HTML»: crea hipervínculos. <code>&lt;A HREF="myWebpage.html"&gt;My Web Page&lt;/A&gt;</code> — el texto entre las etiquetas es el clickable que lleva a la página destino.</td></tr>
+    <tr><td><code>&lt;IMG&gt;</code></td><td>Coloca una imagen. Atributos: <code>SRC</code> (ubicación), <code>ALT</code> (texto si no existe), <code>WIDTH</code>/<code>HEIGHT</code> (tamaño en píxeles), <code>ALIGN</code> (alineación).</td></tr>
+    <tr><td><code>&lt;TABLE&gt;</code> / <code>&lt;TR&gt;</code> / <code>&lt;TD&gt;</code></td><td>Tablas: TABLE define la tabla (BORDER, CELLPADDING, CELLSPACING, WIDTH, BGCOLOR, ALIGN, HSPACE, VSPACE, HEIGHT, BORDERCOLOR); TR define una fila (ALIGN, VALIGN, BGCOLOR); TD define una columna (ALIGN, VALIGN, WIDTH/HEIGHT, <code>COLSPAN</code> columnas a cubrir, <code>ROWSPAN</code> filas a cubrir, NOWRAP, BGCOLOR).</td></tr>
+    <tr><td><code>&lt;DIV&gt;</code></td><td>Define <strong>bloques</strong> de contenido en la página. En sí mismo no hace nada: sirve para aplicar estilos CSS a un bloque.</td></tr>
+    <tr><td><code>&lt;SPAN&gt;</code></td><td>Permite definir una fuente/estilo para <strong>una parte del texto</strong> (a diferencia de DIV, no permite alineaciones).</td></tr>
+  </table>
+  <p class="muted">Atributos de <code>&lt;BODY&gt;</code> listados en la clase: BACKGROUND (imagen de fondo), TEXT, LINK, VLINK, ALINK (colores de links), BGPROPERTIES, TOPMARGIN, LEFTMARGIN, onLoad / onUnload / onFocus / onBlur (scripts asociados a eventos de la página).</p>
+
+  <div class="codeblock">
+    <div class="code-head"><span>html · párrafos y saltos (Clase HTML/JS)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>&lt;html&gt;
+&lt;body&gt;
+  Texto sin &lt;br&gt;. Texto con &lt;br&gt;.&lt;br&gt;   <span class="cmt">&lt;!-- BR: salto dentro del mismo parrafo --&gt;</span>
+  &lt;p&gt;                                    <span class="cmt">&lt;!-- P: comienza un parrafo nuevo --&gt;</span>
+    Este es un parrafo nuevo.
+  &lt;/p&gt;
+  &lt;p&gt;
+    Este es otro parrafo.
+  &lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+
+  <div class="codeblock">
+    <div class="code-head"><span>html · tabla con estilos por fila y celda (Clase HTML/JS)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>&lt;html&gt;
+  &lt;body&gt;
+    Texto fuera de la tabla
+    &lt;table border="2" width="100" height="200"
+         bordercolor="red" align="left"&gt;
+       &lt;tr bgcolor="blue" align="center"&gt;   <span class="cmt">&lt;!-- fila con fondo azul --&gt;</span>
+          &lt;td&gt;A&lt;/td&gt;
+          &lt;td align="right"&gt;B&lt;/td&gt;
+       &lt;/tr&gt;
+       &lt;tr bgcolor="cyan" align="center"&gt;   <span class="cmt">&lt;!-- fila con fondo celeste --&gt;</span>
+         &lt;td&gt;C&lt;/td&gt;
+         &lt;td bgcolor="#8080FF" align="right"&gt;D&lt;/td&gt;  <span class="cmt">&lt;!-- celda con fondo propio --&gt;</span>
+       &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+
+  <h3>Formularios</h3>
+  <p>Permiten <strong>solicitar información al usuario</strong>. Se componen de campos; los valores introducidos se envían a una URL. El tag <code>&lt;form&gt;</code> define <code>action</code> (destino) y <code>method</code> (post/get). Con <code>&lt;input&gt;</code> se definen los campos:</p>
+  <table>
+    <tr><th>Atributo</th><th>Función</th></tr>
+    <tr><td><code>type</code></td><td>Tipo de elemento: button, checkbox, file, hidden, image, password, radio, submit, text</td></tr>
+    <tr><td><code>checked</code></td><td>El elemento debe estar chequeado al iniciarse</td></tr>
+    <tr><td><code>disabled</code></td><td>El usuario no podrá ingresar texto ni seleccionarlo</td></tr>
+    <tr><td><code>maxlength</code></td><td>Número máximo de caracteres (solo con type="text")</td></tr>
+    <tr><td><code>name</code></td><td>Nombre único para el elemento</td></tr>
+    <tr><td><code>readonly</code></td><td>El valor solo podrá ser de lectura</td></tr>
+  </table>
+  <p>Con <code>&lt;select&gt;...&lt;/select&gt;</code> se encierran los valores elegibles de una lista (con <code>multiple</code> se permiten varios; con <code>size="1"</code> es una lista desplegable).</p>
+
+  <div class="codeblock">
+    <div class="code-head"><span>html · formulario completo (Clase HTML/JS)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>&lt;html&gt;
+  &lt;head&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;form action="script.php" method="post"&gt;   <span class="cmt">&lt;!-- envia los datos a script.php --&gt;</span>
+       texto: &lt;input type="text" name="nombre"&gt;&lt;br&gt;
+       password: &lt;input type="password" name="contra"&gt;&lt;br&gt;
+       sexo: &lt;input type="radio" name="boton1" value="1"&gt; hombre
+             &lt;input type="radio" name="boton1" value="2"&gt;mujer&lt;br&gt;
+       vehiculo: &lt;input type="checkbox" name="moto" value="si"&gt;moto
+                 &lt;input type="checkbox" name="coche" value="" checked&gt;coche
+       &lt;br&gt;&lt;br&gt;
+       &lt;select name="colores" multiple&gt;          <span class="cmt">&lt;!-- lista de seleccion multiple --&gt;</span>
+          &lt;option value="r"&gt;rojo&lt;/option&gt;
+          &lt;option value="g"&gt;verde&lt;/option&gt;
+          &lt;option value="b"&gt;azul&lt;/option&gt;
+       &lt;/select&gt;
+       &lt;br&gt;&lt;br&gt;
+       &lt;input type="submit"&gt;                     <span class="cmt">&lt;!-- boton de envio --&gt;</span>
+       &lt;input type="reset"&gt;                      <span class="cmt">&lt;!-- boton de limpieza --&gt;</span>
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+
+  <div class="codeblock">
+    <div class="code-head"><span>html · DIV y SPAN con estilos CSS (Clase HTML/JS)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;style type="text/css"&gt;
+     .warning {                    <span class="cmt">&lt;!-- regla de estilo para bloques DIV --&gt;</span>
+        font-family:sans-serif;
+        color:red;
+        padding-left: 50pt;
+        padding-right: 50pt;
+     }
+     .product {                    <span class="cmt">&lt;!-- regla para fragmentos de texto SPAN --&gt;</span>
+        color:brown;
+        font-weight:900;
+        font-size:95%;
+        font-family:sans-serif;
+     }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  antes del div
+  &lt;div class="warning"&gt;hola!&lt;/div&gt;  <span class="cmt">&lt;!-- DIV: bloque con la clase warning --&gt;</span>
+  Después del div
+  El texto que sigue está &lt;span class="product"&gt;resaltado&lt;/span&gt;.
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+</article>
+
+<article class="topic php" id="p2">
+  <span class="badge php">PHP · Clase HTML/JS</span>
+  <h2>16. JavaScript: interactividad en el navegador</h2>
+
+  <h3>Definición</h3>
+  <p>JavaScript fue diseñado para agregarle <strong>interactividad a las páginas HTML</strong>. Es un lenguaje de <strong>scripting embebido</strong> en las páginas (explícitamente o incluido desde un archivo). Es <strong>interpretado</strong>: se ejecuta sin compilación previa, sin licencias, y es soportado por la mayoría de los navegadores. A diferencia de PHP, se ejecuta <strong>en el navegador del cliente</strong>.</p>
+
+  <div class="codeblock">
+    <div class="code-head"><span>javascript · hola mundo y scripts externos (Clase HTML/JS)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>&lt;html&gt;
+  &lt;body&gt;
+    &lt;script type="text/javascript"&gt;
+       document.write("Hola Mundo!")   <span class="cmt">// escribe directamente en la pagina</span>
+    &lt;/script&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+
+<span class="cmt">// ---- Script externo: el mismo script en varias paginas ----</span>
+<span class="cmt">// hola.js</span>
+document.write("Hola Mundo!")
+
+<span class="cmt">// index.html</span>
+&lt;html&gt;
+  &lt;head&gt;&lt;/head&gt;
+  &lt;body&gt;
+   &lt;script src="hola.js"&gt;&lt;/script&gt;   <span class="cmt">// incluye la referencia al archivo</span>
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+
+  <h3>Eventos</h3>
+  <ul>
+    <li><code>onChange</code>: ejecuta una función cuando el valor de un control es modificado. Ejemplo de la clase (campo de asistencia generado con PHP): <code>onChange="return verificaAsistencia(this);"</code></li>
+    <li><code>onClick</code>: ejecuta una función cuando se hace click sobre un objeto. Ejemplo: <code>&lt;a href="#" onClick="AbreVentana('elegirUbicacion.php');"&gt;Buscar Localidad&lt;/a&gt;</code></li>
+    <li><code>onsubmit</code>: ejecuta una función <strong>antes de que el formulario sea enviado</strong> al servidor. El <code>return</code> de la función determina si el formulario se envía o no: <code>&lt;form ... onsubmit="return radioButtonSelected(this)"&gt;</code></li>
+  </ul>
+
+  <h3>Objetos: abrir ventanas</h3>
+  <div class="codeblock">
+    <div class="code-head"><span>javascript · objeto window (Clase HTML/JS)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>&lt;script language="JavaScript"&gt;
+  function AbreVentana(url)      <span class="cmt">// abre una ventana nueva del navegador</span>
+  {
+    window.open(url,'datos','width=450,height=200','');
+  }
+&lt;/script&gt;</code></pre>
+  </div>
+
+  <h3>Validaciones de formularios</h3>
+  <p>Script clásico para validar los datos ingresados por el usuario: toma como parámetro el nombre del form del HTML y verifica que ningún campo obligatorio esté vacío.</p>
+  <div class="codeblock">
+    <div class="code-head"><span>javascript · validación de login (Clase HTML/JS)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>&lt;script LANGUAGE="JavaScript"&gt;
+  function itemsConValores(pForm) {
+    sIdentif = pForm.fUsuario.value ;   <span class="cmt">// lee el campo usuario</span>
+    sClave    = pForm.fClave.value ;    <span class="cmt">// lee el campo clave</span>
+    if (sIdentif == "") {
+      alert("\nNo ingresaste la identificación.\n")   <span class="cmt">// avisa y aborta</span>
+      pForm.fUsuario.focus();           <span class="cmt">// devuelve el foco al campo vacio</span>
+      return (false);                   <span class="cmt">// false = el form NO se envia</span>
+    }
+    else if (sClave == "") {
+      alert("\nNo ingresaste la clave.\n")
+      pForm.fClave.focus();
+      return (false);
+    }
+    else
+      return (true);                    <span class="cmt">// true = el form se envia al servidor</span>
+  }
+&lt;/script&gt;
+&lt;form action="autentificarse.php" method="POST" onsubmit="return itemsCon-
+Valores(this)" target="inferior" name="form1"&gt;</code></pre>
+  </div>
+
+  <h3>Índices de <code>&lt;select&gt;</code> y envío forzado</h3>
+  <div class="codeblock">
+    <div class="code-head"><span>javascript · selectedIndex y submit (Clase HTML/JS)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>&lt;script language="JavaScript"&gt;
+  function validarForm() {
+    <span class="cmt">// en campos select se accede al elemento elegido con options y selectedIndex</span>
+    var sel = window.document.form1.elements[0].options.selectedIndex;
+    if (window.document.form1.elements[0].options[sel].value == "-1") {
+           alert("No seleccionaste ningún certificado");
+           return false;
+         }
+         else
+           return true;
+  }
+&lt;/script&gt;
+
+<span class="cmt">// Para forzar el envio de un formulario se invoca al metodo submit</span>
+<span class="cmt">// del objeto de tipo form asociado al nombre del formulario:</span>
+&lt;script language="JavaScript"&gt;
+  function refrescar()
+  {
+    formInt.submit();
+  }
+&lt;/script&gt;</code></pre>
+  </div>
+</article>
+
+<article class="topic php" id="p3">
+  <span class="badge php">PHP · Clase 1 PHP</span>
+  <h2>17. ¿Qué es PHP?</h2>
+
+  <h3>Definición</h3>
+  <div class="note">PHP (acrónimo de <strong>«PHP: Hypertext Preprocessor»</strong>) es un lenguaje de <strong>código abierto</strong>, <strong>interpretado</strong>, de <strong>alto nivel</strong>, <strong>embebido en páginas HTML</strong> y <strong>ejecutado en el servidor</strong>.</div>
+  <p>A diferencia de Java o JavaScript (que se ejecutan en el navegador), PHP corre en el servidor: eso permite <strong>acceder a los recursos del servidor</strong>, como una base de datos. El programa PHP se ejecuta en el servidor y el <strong>resultado</strong> se envía al navegador — normalmente una página HTML (o WML).</p>
+
+  <h3>¿Qué se puede hacer con PHP?</h3>
+  <ul>
+    <li>Construir <strong>páginas dinámicas</strong> en un entorno Web.</li>
+    <li>A nivel sistemas, desarrollar <strong>cualquier sistema</strong> (aún los más complejos) sin problemas.</li>
+    <li>Acceder a <strong>librerías externas y bases de datos</strong>.</li>
+  </ul>
+
+  <h3>Ventajas de PHP</h3>
+  <table>
+    <tr><th>Ventaja</th><th>Detalle</th></tr>
+    <tr><td>Rápido</td><td>El tiempo de pre-procesado es rápido</td></tr>
+    <tr><td>Gratuito</td><td>No se paga para su utilización</td></tr>
+    <tr><td>Fácil de usar</td><td>Sintaxis simple</td></tr>
+    <tr><td>Versátil</td><td>Se ejecuta en una variedad de sistemas operativos</td></tr>
+    <tr><td>Seguro</td><td>El código PHP queda <strong>oculto en el servidor</strong></td></tr>
+    <tr><td>Adaptable</td><td>Al ser código abierto puede ser modificado</td></tr>
+    <tr><td>Amplio soporte</td><td>Comunidad enorme de programadores</td></tr>
+  </table>
+  <p class="muted">Ejemplos de sitios con PHP: Drupal, Joomla, Moodle.</p>
+
+  <h3>Características principales</h3>
+  <ul>
+    <li><strong>Interactúa con Forms:</strong> procesa la información que el usuario carga.</li>
+    <li><strong>Comunicación con bases de datos.</strong></li>
+    <li><strong>Genera páginas Web seguras.</strong></li>
+    <li><strong>Se combina con JavaScript.</strong></li>
+  </ul>
+  <p class="muted">Versiones según la clase: 5.x (fundamental: POO), 4.x (mejoras de velocidad/seguridad), 3.x (discontinuada).</p>
+
+  <h3>¿Qué se necesita para correr PHP?</h3>
+  <ul>
+    <li>Sistema operativo (Windows, Linux, MacOS, Unix…).</li>
+    <li>Servidor Web (preferentemente <strong>APACHE</strong>).</li>
+    <li>PHP instalado — en la práctica: el <strong>paquete Wamp</strong> (con su configuración de Apache, de PHP y de Wamp).</li>
+  </ul>
+
+  <h3>Estilos de embebido y sintaxis básica</h3>
+  <table>
+    <tr><th>Estilo</th><th>Sintaxis</th></tr>
+    <tr><td>SGML</td><td><code>&lt;? code ?&gt;</code></td></tr>
+    <tr><td>XML (el recomendado)</td><td><code>&lt;?php code ?&gt;</code></td></tr>
+    <tr><td>ASP</td><td><code>&lt;% code %&gt;</code></td></tr>
+    <tr><td>JavaScript</td><td><code>&lt;script language="php"&gt; code &lt;/script&gt;</code></td></tr>
+  </table>
+  <p>Para interpretar un archivo .php, el motor lee el texto hasta encontrar los caracteres especiales que delimitan el inicio del código y <strong>ejecuta lo encerrado entre ellos</strong>; el resto sale tal cual.</p>
+
+  <div class="codeblock">
+    <div class="code-head"><span>php · hola mundo (Clase 1 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>&lt;html&gt;
+    &lt;head&gt;
+     &lt;title&gt;Ejemplo de PHP&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;?php echo "&lt;p&gt;Hola Mundo&lt;/p&gt;"; ?&gt;   <span class="cmt">// PHP embebido dentro del HTML</span>
+    &lt;/body&gt;
+   &lt;/html&gt;</code></pre>
+  </div>
+
+  <div class="codeblock">
+    <div class="code-head"><span>php · las 4 formas de delimitar código (Clase 1 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>1. &lt;?php echo("si quieres servir documentos XHTML o XML, haz como aqui\n"); ?&gt;
+
+2. &lt;? echo ("esta es la mas simple, una instruccion de procesado SGML \n"); ?&gt;
+   &lt;?= expression ?&gt;   <span class="cmt">// abreviatura de "&lt;? echo expression ?&gt;"</span>
+
+3. &lt;script language="php"&gt;
+     echo ("muchos editores (como FrontPage) no aceptan instrucciones de procesado");
+   &lt;/script&gt;
+
+4. &lt;% echo ("Opcionalmente, puedes usar las etiquetas ASP"); %&gt;
+   &lt;%= $variable; <span class="cmt">// abreviatura de "&lt;% echo ... %&gt;"</span> %&gt;</code></pre>
+  </div>
+
+  <div class="codeblock">
+    <div class="code-head"><span>php · mezcla de HTML y PHP con phpinfo() (Clase 1 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;PHP Test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;Esta es una línea PHP
+&lt;?php
+echo "&lt;p&gt;A continuación se muestra la configuración de PHP&lt;/p&gt;";
+phpinfo();    <span class="cmt">// funcion predefinida: muestra toda la configuracion del servidor</span>
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+  <p class="muted">La clase también muestra el contraste con la «programación tradicional en CGI» (Perl imprimiendo el HTML línea por línea con print) — de ahí la ventaja del PHP embebido.</p>
+</article>
+
+<article class="topic php" id="p4">
+  <span class="badge php">PHP · Clase 1 PHP</span>
+  <h2>18. Tipos de Datos, Variables y Operadores</h2>
+
+  <h3>Tipos de datos</h3>
+  <table>
+    <tr><th>Categoría</th><th>Tipos</th></tr>
+    <tr><td><strong>Escalares</strong></td><td>Boolean, Integer, Float, String</td></tr>
+    <tr><td><strong>Compuestos</strong></td><td>Array, Object</td></tr>
+  </table>
+  <p>El tipo de una variable <strong>no se declara</strong>: lo decide PHP en tiempo de compilación según el <strong>contexto</strong> en que se usa (lenguaje dinámico).</p>
+
+  <div class="codeblock">
+    <div class="code-head"><span>php · tipos y funciones de inspección (Clase 1 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>&lt;?php
+   $un_bool = TRUE; <span class="cmt">// un valor booleano</span>
+   $un_str = "foo"; <span class="cmt">// una cadena (con comillas dobles)</span>
+   $un_str2 = 'foo'; <span class="cmt">// una cadena (con comillas simples)</span>
+   $un_int = 12;     <span class="cmt">// un entero</span>
+
+   echo gettype($un_bool); <span class="cmt">// imprime: boolean</span>
+   echo gettype($un_str);  <span class="cmt">// imprime: string</span>
+
+   <span class="cmt">// Si este valor es un entero, incrementarlo en cuatro</span>
+   if (is_int($un_int)) {
+       $un_int += 4;
+   }
+
+   <span class="cmt">// Si $bool es una cadena, imprimirla (no imprime nada, es booleano)</span>
+   if (is_string($un_bool)) {
+       echo "Cadena: $un_bool";
+   }
+?&gt;</code></pre>
+  </div>
+
+  <h3>Variables</h3>
+  <ul>
+    <li>Se representan con un signo <strong>$</strong> seguido del nombre. El nombre es <strong>sensible a mayúsculas y minúsculas</strong>.</li>
+    <li>Un nombre válido empieza con letra o guion bajo (_), seguido de letras, números y rayas: <code>'[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'</code>.</li>
+    <li>Se asignan <strong>por valor</strong> o <strong>por referencia (punteros)</strong>, usando <code>&amp;</code>.</li>
+    <li><strong>Predefinidas:</strong> disponibles en cualquier script; dependen del entorno y generalmente vienen como arreglos (<code>$_POST</code>, <code>$_GET</code>, <code>$_SERVER</code>, <code>$_FILES</code>, etc.).</li>
+    <li><strong>Ámbito (scope):</strong> es un ámbito simple: script (actual e incluidos) y funciones. Una variable global NO es visible dentro de una función salvo que se declare con <code>global</code>.</li>
+  </ul>
+
+  <div class="codeblock">
+    <div class="code-head"><span>php · asignación por referencia (Clase 1 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>&lt;?php
+  $foo = 'Bob';   <span class="cmt">// asigna el valor 'Bob' a $foo</span>
+  $bar = &amp;$foo;   <span class="cmt">// $bar apunta a la MISMA variable: si cambia $foo, cambia $bar</span>
+?&gt;</code></pre>
+  </div>
+
+  <div class="codeblock">
+    <div class="code-head"><span>php · ámbito: global vs. local (Clase 1 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>&lt;?php
+$a = 1; <span class="cmt">/* global scope */</span>
+function Test()
+{
+   echo $a; <span class="cmt">/* referencia a variable LOCAL: no imprime nada, $a global no es visible */</span>
+}
+Test();
+?&gt;
+
+&lt;?php
+$a = 1;
+$b = 2;
+function Sum()
+{
+    global $a, $b;    <span class="cmt">// se declara global para poder usarlas dentro de la funcion</span>
+    $b = $a + $b;
+}
+Sum();
+echo $b;              <span class="cmt">// imprime 3</span>
+?&gt;</code></pre>
+  </div>
+
+  <h3>Constantes</h3>
+  <ul>
+    <li>Solo se pueden definir de tipos <strong>escalares</strong> (boolean, integer, float, string).</li>
+    <li>Sensibles a mayúsculas y minúsculas.</li>
+    <li>Se definen con la función <code>define()</code>.</li>
+  </ul>
+  <div class="codeblock">
+    <div class="code-head"><span>php · definir una constante (Clase 1 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>define("CONSTANT", "Hello world.");</code></pre>
+  </div>
+
+  <h3>Operadores</h3>
+  <table>
+    <tr><th>Tipo</th><th>Actúa sobre</th><th>Ejemplo</th></tr>
+    <tr><td>Unarios</td><td>Un solo valor</td><td><code>!</code> (negación)</td></tr>
+    <tr><td>Binarios</td><td>Dos valores</td><td><code>+</code> (suma)</td></tr>
+    <tr><td>Ternarios</td><td>Tres valores: elige entre dos expresiones según una tercera</td><td><code>?</code> (selección múltiple)</td></tr>
+  </table>
+  <p class="muted">La clase incluye además tablas de <strong>precedencia de operadores</strong> (qué operación se evalúa primero en una expresión compuesta).</p>
+</article>
+
+<article class="topic php" id="p5">
+  <span class="badge php">PHP · Clase 1 PHP</span>
+  <h2>19. Sentencias: Condicionales y Bucles</h2>
+
+  <p>Un script PHP se compone de una serie de <strong>sentencias</strong>: asignaciones, llamadas a funciones, condiciones y bucles.</p>
+
+  <h3>Condicionales: if / else / elseif</h3>
+  <p>Permiten la ejecución condicional de fragmentos de código; PHP las maneja <strong>de manera similar a C</strong>. Para agrupar más de una sentencia se usan las llaves <code>{}</code>.</p>
+  <div class="codeblock">
+    <div class="code-head"><span>php · if basico (Clase 1 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>&lt;?php
+   if (expr)
+      sentencia
+   else
+       sentencia
+?&gt;</code></pre>
+  </div>
+  <p>Existe la combinación <strong>elseif</strong> (if + else); puede haber <strong>más de un</strong> elseif en la misma sentencia condicional:</p>
+  <div class="codeblock">
+    <div class="code-head"><span>php · if / elseif / else (Clase 1 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>&lt;?php
+   if ($a &gt; $b) {
+       print "a es mayor que b";
+   } elseif ($a == $b) {
+       print "a es igual que b";
+   } else {
+       print "a es menor que b";
+   }
+?&gt;</code></pre>
+  </div>
+
+  <h3>La sentencia switch</h3>
+  <p>Es similar a una serie de IF sobre la misma expresión. <strong>Importante entender su ejecución</strong> para evitar errores: switch ejecuta línea por línea; al comienzo no se ejecuta código. Solo cuando encuentra un <code>case</code> cuyo valor coincide con la expresión comienza a ejecutar, y continúa <strong>hasta el final del bloque o hasta el primer break</strong>. Si no se escribe <code>break</code>, PHP seguirá ejecutando las sentencias del siguiente case (efecto cascada). El <strong>default</strong> coincide con todo lo que no coincidió en los otros case.</p>
+  <div class="codeblock">
+    <div class="code-head"><span>php · switch con default (Clase 1 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>&lt;?php
+   switch ($i) {
+      case 0:
+         print "i es igual a 0";
+         break;            <span class="cmt">// sin el break seguiria ejecutando el case 1, 2 y default</span>
+      case 1:
+         print "i es igual a 1";
+         break;
+      case 2:
+         print "i es igual a 2";
+         break;
+      default:
+         print "i no es igual a 0, 1 o 2";
+   }
+?&gt;</code></pre>
+  </div>
+
+  <h3>Sentencias repetitivas (bucles)</h3>
+  <table>
+    <tr><th>Bucle</th><th>Sintaxis</th><th>Comportamiento</th></tr>
+    <tr><td><strong>while</strong></td><td><code>while (expresión) sentencia</code></td><td>Se comporta como en C: ejecuta las sentencias anidadas repetidamente <strong>mientras</strong> la expresión evalúe a TRUE (chequea ANTES de iterar)</td></tr>
+    <tr><td><strong>do…while</strong></td><td><code>do sentencia while (expresión)</code></td><td>Igual al while, salvo que la expresión se evalúa <strong>al final</strong> de cada iteración (ejecuta al menos una vez)</td></tr>
+    <tr><td><strong>for</strong></td><td><code>for (expr1; expr2; expr3) sentencia</code></td><td>expr1 se evalúa incondicionalmente al comienzo; expr2 al comienzo de cada iteración (condición); expr3 al final de cada iteración (incremento)</td></tr>
+    <tr><td><strong>foreach</strong></td><td><code>foreach ($array as $key =&gt; $value) { … }</code></td><td>Específico para recorrer <strong>matrices</strong> (ver tema 21)</td></tr>
+  </table>
+</article>
+
+<article class="topic php" id="p6">
+  <span class="badge php">PHP · Clase 2 PHP</span>
+  <h2>20. Funciones</h2>
+
+  <h3>Definición</h3>
+  <p>Son un conjunto de instrucciones o sentencias que realizan una <strong>tarea específica</strong> y como resultado <strong>puede devolver o no un valor</strong>. Se dividen en: <strong>definidas por el usuario</strong> y <strong>predefinidas por PHP</strong>.</p>
+
+  <h3>Reglas de las funciones de usuario</h3>
+  <ul>
+    <li><strong>No es necesario</strong> definirlas antes de ser llamadas.</li>
+    <li>Los nombres son <strong>sensibles a mayúsculas y minúsculas</strong>.</li>
+    <li>Se pueden definir <strong>funciones dentro de funciones</strong>.</li>
+    <li>Cualquier instrucción o sentencia válida en PHP puede incorporarse en una función.</li>
+  </ul>
+
+  <h3>Parámetros</h3>
+  <p>La información se suministra a través de los parámetros: una lista de variables y/o constantes <strong>separadas por coma</strong>. PHP soporta tres modos:</p>
+  <table>
+    <tr><th>Modo</th><th>Detalle</th></tr>
+    <tr><td><strong>Por valor</strong></td><td>Es el modo por defecto: la función trabaja sobre una copia</td></tr>
+    <tr><td><strong>Por referencia</strong></td><td>Se anteponen con el signo <code>&amp;</code>: la función trabaja sobre la variable original</td></tr>
+    <tr><td><strong>Por defecto</strong></td><td>Tienen un valor predeterminado; deben colocarse <strong>a la derecha</strong> de los parámetros que no son por defecto</td></tr>
+  </table>
+
+  <h3>Retorno de valores</h3>
+  <ul>
+    <li>Los valores se devuelven con la instrucción <strong>return</strong>; puede devolverse cualquier tipo, <strong>incluyendo objetos</strong>.</li>
+    <li>Si no se quiere devolver valor alguno, basta escribir <code>return;</code> sola.</li>
+    <li>También se pueden devolver valores a través de los <strong>parámetros por referencia</strong>.</li>
+  </ul>
+
+  <h3>Funciones predefinidas</h3>
+  <p>Vienen definidas por <strong>módulos</strong> incorporados al lenguaje en la compilación o dinámicamente en tiempo de ejecución. Al usarlas, hay que entender si la función trabaja <strong>sobre una copia</strong> de los valores pasados o <strong>directamente sobre ellos</strong>. Se clasifican en categorías/módulos: matrices y arreglos, clases y objetos, carácter y String, DOM y XML, <strong>bases de datos</strong> (Informix, PostgreSQL, MySQL, SQLServer…), OpenSSL, PDF, FTP, Hash.</p>
+  <table>
+    <tr><th>Función</th><th>Qué hace</th></tr>
+    <tr><td><code>sizeof()</code> / <code>count()</code></td><td>Define el tamaño de una variable; en arreglos, la cantidad de elementos</td></tr>
+    <tr><td><code>in_array()</code></td><td>Revisa si un valor existe en una matriz</td></tr>
+    <tr><td><code>array_shift()</code></td><td>Extrae un elemento del comienzo de la matriz</td></tr>
+    <tr><td><code>array_fill()</code></td><td>Llena una matriz con valores</td></tr>
+    <tr><td><code>crypt()</code></td><td>Encripta una cadena con el método hash</td></tr>
+    <tr><td><code>explode()</code></td><td>Divide una cadena por otra</td></tr>
+    <tr><td><code>implode()</code></td><td>Une elementos de una matriz a partir de una cadena</td></tr>
+    <tr><td><code>strtolower()</code> / <code>strtoupper()</code></td><td>Convierte a minúsculas o mayúsculas</td></tr>
+  </table>
+</article>
+
+<article class="topic php" id="p7">
+  <span class="badge php">PHP · Clase 2 PHP</span>
+  <h2>21. Matrices (Arrays)</h2>
+
+  <h3>Definición</h3>
+  <p>Una matriz en PHP es un tipo de datos que <strong>asocia valores con claves</strong>. Puede usarse como matriz real, lista o vector, tabla asociativa, diccionario, colección, pila, cola e incluso árbol.</p>
+  <ul>
+    <li>Una clave puede ser de tipo <strong>entera o string</strong>; los valores decimales serán truncados.</li>
+    <li>Si no se especifica clave, se usa el máximo de los índices enteros + 1. Si se especifica una clave ya asignada, el valor se <strong>reemplaza</strong>.</li>
+    <li>Se crea con la construcción del lenguaje <code>array()</code>, que toma parejas <code>clave =&gt; valor</code>.</li>
+    <li>Modificar: <code>$matriz[clave] = valor;</code> (si no existe la variable, se crea). Remover una pareja clave/valor: <code>unset()</code>.</li>
+  </ul>
+
+  <h3>Imprimir y ordenar matrices</h3>
+  <table>
+    <tr><th>Función</th><th>Qué hace</th></tr>
+    <tr><td><code>print_r($customer)</code></td><td>Imprime la matriz completa de forma legible: <code>Array( [1] =&gt; Sam Smith [2] =&gt; Sue Jones [3] =&gt; Mary Huang )</code></td></tr>
+    <tr><td><code>var_dump($customer)</code></td><td>Imprime la matriz con MÁS información que print_r (tipos y longitudes): <code>array(3) { [1]=&gt; string(9) "Sam Smith" ... }</code></td></tr>
+    <tr><td><code>sort($arreglo)</code></td><td>Ordena la matriz; <strong>los índices o claves son cambiados</strong>. Ejemplo de la clase: <code>$streets</code> con «Elm St.», «Oak Dr.», «7th Ave.» queda «7th Ave.», «Elm St.», «Oak Dr.»</td></tr>
+    <tr><td><code>asort($arreglo)</code></td><td>Ordena la matriz <strong>conservando las claves</strong></td></tr>
+  </table>
+
+  <h3>Recorrido con foreach</h3>
+  <div class="codeblock">
+    <div class="code-head"><span>php · sintaxis del foreach (Clase 2 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>foreach ( $arrayname as $keyname =&gt; $valuename )
+{
+     block of statements;
+}
+<span class="cmt">// $arrayname:  nombre del arreglo que queremos recorrer</span>
+<span class="cmt">// $keyname:    variable donde se guarda el valor de la CLAVE mientras se recorre</span>
+<span class="cmt">// $valuename:  variable donde se guarda el VALOR propiamente dicho</span></code></pre>
+  </div>
+
+  <div class="codeblock">
+    <div class="code-head"><span>php · ejemplo completo de recorrido (Clase 2 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>$state_population = array ( "CA" =&gt; 34501130,
+                         "WY" =&gt; 494423,
+                         "OR" =&gt; 3472867);
+ksort($state_population);                    <span class="cmt">// ordena por clave (estado)</span>
+foreach($state_population as $state =&gt; $population )
+{
+  $population = number_format($population);  <span class="cmt">// formato con separador de miles</span>
+  echo "$state: $population.&lt;br&gt;";           <span class="cmt">// imprime cada par clave-valor</span>
+}</code></pre>
+  </div>
+
+  <h3>Funciones predefinidas de matrices</h3>
+  <div class="codeblock">
+    <div class="code-head"><span>php · tamaño y conversión string↔array (Clase 2 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>sizeof(array_name)      <span class="cmt">// tamaño del arreglo (alias: count)</span>
+count(array_name)
+
+explode(carácter_separador,string)  <span class="cmt">// convierte un STRING a ARRAY</span>
+implode(carácter_separador,array)   <span class="cmt">// convierte un ARRAY a STRING</span></code></pre>
+  </div>
+
+  <h3>Matrices multidimensionales</h3>
+  <p>Son <strong>arreglos de arreglos</strong>: sirven para almacenar datos como si fuera una tabla:</p>
+  <div class="codeblock">
+    <div class="code-head"><span>php · matriz de dos dimensiones (Clase 2 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>$foodPrices['vegetales']['tomate'] = 0.50;
+$foodPrices['vegetales']['espinaca'] = 1.00;
+$foodPrices['frutas']['manzana'] = 2.50;
+$foodPrices['frutas']['naranja'] = 2.00;
+$foodPrices['carnes']['lomo'] = 3.50;
+$foodPrices['carnes']['peceto'] = 5.00;</code></pre>
+  </div>
+
+  <h3>Matrices predefinidas (superglobales)</h3>
+  <table>
+    <tr><th>Arreglo</th><th>Contenido</th></tr>
+    <tr><td><code>$_POST</code></td><td>Contenido de todas las variables de un form (envío POST)</td></tr>
+    <tr><td><code>$_GET</code></td><td>Contenido de todas las variables de un form (envío GET)</td></tr>
+    <tr><td><code>$_SESSION</code></td><td>Variables de sesión declaradas</td></tr>
+    <tr><td><code>$_FILES</code></td><td>Nombres de los archivos subidos (upload)</td></tr>
+    <tr><td><code>$_SERVER</code></td><td>Información del servidor donde se ejecuta PHP</td></tr>
+    <tr><td><code>$_REQUEST</code></td><td>Valores de GET, POST y SESSION</td></tr>
+    <tr><td><code>$_ENV</code></td><td>Información del sistema operativo donde está instalado PHP</td></tr>
+    <tr><td><code>$_COOKIE</code></td><td>Contenido de las cookies utilizadas</td></tr>
+  </table>
+</article>
+
+<article class="topic php" id="p8">
+  <span class="badge php">PHP · Clase 3 PHP</span>
+  <h2>22. Bases de Datos y MySQL desde PHP</h2>
+
+  <h3>¿Qué es una base de datos?</h3>
+  <p>Es una aplicación que <strong>almacena una colección de datos</strong>, con su propio conjunto de programas para manipularla (crearla, insertar datos, eliminarlos, reordenarla…). Motores de base de datos: <strong>MySQL, Oracle, Sybase, PostgreSQL, SQLServer</strong>, etc.</p>
+  <p><strong>¿Por qué una BD?</strong> Sin BD, las páginas generadas con PHP serían <strong>estáticas</strong> (sin actualización de información). Siempre es necesario almacenar datos para luego consultarlos — ej: un foro almacena todos los envíos sobre un tema para luego mostrarlos, buscarlos, etc.</p>
+  <p><strong>Ventajas:</strong> mantenimiento y escalabilidad, portabilidad, búsqueda, seguridad, performance.<br>
+  <strong>Características:</strong> lenguaje de consulta (<strong>SQL – Structured Query Language</strong>), integridad referencial (PKs, FKs), índices, manejo de transacciones, procedimientos y triggers.</p>
+
+  <h3>SQL: los comandos esenciales</h3>
+  <div class="codeblock">
+    <div class="code-head"><span>sql · SELECT (Clase 3 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>SELECT campo1, campo2, campo3, ...
+FROM tabla
+WHERE condicion;
+
+<span class="cmt">-- El comando mas importante para OBTENER datos.</span>
+<span class="cmt">-- Ejemplo: todos los empleados que ganan mas de $100</span>
+SELECT *
+FROM empleados
+WHERE sueldo &gt;= 100;</code></pre>
+  </div>
+  <div class="codeblock">
+    <div class="code-head"><span>sql · JOIN entre dos tablas (Clase 3 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code><span class="cmt">-- Los JOIN permiten obtener datos de VARIAS tablas al mismo tiempo</span>
+<span class="cmt">-- con una sola consulta. Ejemplo de la clase:</span>
+<span class="cmt">-- Tabla Noticias (ID, Id_tema, titulo, epigrafe, fecha, destacada)</span>
+<span class="cmt">-- Tabla Temas    (ID, descripcion, desc_abrev, color)</span>
+
+<span class="cmt">-- Se necesita saber por cada noticia el tema al que pertenece:</span>
+Select noticias.titulo, noticias.epigrafe, temas.descripcion
+  From noticias, temas
+  Where noticias.id_tema = temas.id
+        AND .........</code></pre>
+  </div>
+  <div class="codeblock">
+    <div class="code-head"><span>sql · INSERT, UPDATE y DELETE (Clase 3 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code><span class="cmt">-- INSERT: carga datos en la base (primero se cargan, luego se consultan)</span>
+INSERT INTO &lt;tabla&gt;
+(&lt;campo1&gt;,&lt;campo2&gt;,...,&lt;campon&gt;)
+VALUES
+(&lt;valor1&gt;,&lt;valor2&gt;,....,&lt;valorn&gt;);
+
+<span class="cmt">-- Ejemplo:</span>
+INSERT INTO temas (ID, descripcion, desc_abreviada, color) VALUES
+      (15,'Prueba','Pru','#33FF33');
+
+<span class="cmt">-- UPDATE: modifica datos ya insertados</span>
+UPDATE &lt;tabla&gt;
+  SET campo1 = valor1, campo2 = valor2, ..., campon = valorn
+  WHERE &lt;condicion&gt;;
+
+<span class="cmt">-- DELETE: borra o elimina datos</span>
+DELETE
+FROM &lt;tabla&gt;
+WHERE &lt;condicion&gt;</code></pre>
+  </div>
+
+  <h3>Funciones PHP para MySQL (paso a paso)</h3>
+  <table>
+    <tr><th>Paso</th><th>Función</th><th>Detalle</th></tr>
+    <tr><td>1. Conectarse</td><td><code>mysql_connect($servidor, $usuario, $password)</code></td><td>Ej: <code>mysql_connect('localhost', 'root', '');</code></td></tr>
+    <tr><td>2. Elegir la base</td><td><code>mysql_select_db(&lt;base_de_datos&gt;)</code></td><td>Selecciona la base entre las disponibles en el servidor</td></tr>
+    <tr><td>3. Consultar</td><td><code>mysql_query(&lt;consulta&gt;)</code></td><td>Ejecuta el SQL; devuelve un resultado</td></tr>
+    <tr><td>4. Contar filas</td><td><code>mysql_num_rows($result)</code></td><td>Para SELECT. Para DELETE/INSERT/UPDATE se usa <code>mysql_affected_rows()</code></td></tr>
+    <tr><td>5. Recorrer</td><td><code>mysql_fetch_array / fetch_row / fetch_assoc</code></td><td>Devuelven una fila a la vez como array</td></tr>
+    <tr><td>6. Cerrar</td><td><code>mysql_free_result()</code> + <code>mysql_close()</code></td><td>Libera el resultado y cierra la conexión</td></tr>
+  </table>
+  <p>Con <code>mysql_fetch_array($resultado)</code> la fila se asigna a una variable como array, y cada campo se referencia como ítem del arreglo: <code>echo $fila['descripcion'];</code> o por índice <code>echo $fila[0];</code></p>
+
+  <div class="codeblock">
+    <div class="code-head"><span>php · conexión con control de errores (Clase 3 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>$con=mysql_connect('localhost', 'root', '');
+$base = mysql_select_db('curso_php', $con);
+if (!$base) {
+    die ('No se puede utilizar la base curso_php debido a: ' . mysql_error());
+}
+<span class="cmt">// die() corta la ejecucion mostrando el mensaje si la conexion fallo</span></code></pre>
+  </div>
+
+  <div class="codeblock">
+    <div class="code-head"><span>php · ejemplo completo de consulta (Clase 3 PHP)</span><button class="copy">📋 Copiar</button></div>
+<pre><code>$con=mysql_connect('localhost', 'root', '');
+$base = mysql_select_db('curso_php', $con);
+if (!$base) {
+    die ('No se puede utilizar la base curso_php debido a: ' .
+      mysql_error());
+}
+$resultado = mysql_query('Select id, descripcion, color from temas order
+      by 2',$con);
+if (!$resultado){
+   $mensaje = 'Se produjo un error en el armado del menú' .
+      mysql_error();
+   die($mensaje);
+}
+while ($fila = mysql_fetch_array($resultado)) {   <span class="cmt">// recorre fila por fila</span>
+      echo $fila['descripcion'];                  <span class="cmt">// imprime el campo descripcion</span>
+}
+mysql_free_result($resultado);   <span class="cmt">// libera la memoria del resultado</span>
+mysql_close($con);               <span class="cmt">// cierra la conexion con el servidor</span></code></pre>
+  </div>
+
+  <h3>Control de errores</h3>
+  <ul>
+    <li><code>mysql_errno()</code>: devuelve el <strong>número</strong> de error interno de MySQL.</li>
+    <li><code>mysql_error()</code>: devuelve la <strong>descripción</strong> del error que corresponde a ese número.</li>
+  </ul>
+  <div class="note warn">⚠️ Conviene usarlas <strong>solamente durante el desarrollo y el debug, no en producción</strong>.</div>
+  <p class="muted">Otras funciones disponibles: <code>mysql_insert_id()</code>, <code>mysql_field_type()</code>, <code>mysql_create_db()</code>, <code>mysql_drop_db()</code>, <code>mysql_change_user()</code>, <code>mysql_list_tables()</code>, entre otras.</p>
+</article>
+
+<footer style="text-align:center; color:var(--muted); font-size:.85rem; padding: 10px 0 30px;">
+  <p>Guía de estudio de Programación II · Construida a partir de los 19 PDFs de la cátedra (Dr. Oscar Testa · Tecnicatura en Informática de Gestión).</p>
+</footer>
+
+</main>
+</div>
+
+<script src="app.js"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920" integrity="sha512-L0ha0OXavK/8okipN9F8BtP84dg9DUhPERbBXzwI6dgTA55d2+yweo3pn5CSFYs45/r8md2+xvUPtTdvTNRfjA==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>

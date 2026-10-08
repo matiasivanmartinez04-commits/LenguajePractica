@@ -1,0 +1,186 @@
+/* ===== Programación II — Guía de Estudio (Arduino & PHP) ===== */
+:root {
+  --bg: #0e1420;
+  --panel: #151d2e;
+  --panel2: #1b2537;
+  --border: #26324a;
+  --text: #d9e2f2;
+  --muted: #8b9bb8;
+  --arduino: #22d3bd;
+  --arduino-dim: rgba(34, 211, 189, .12);
+  --php: #a78bfa;
+  --php-dim: rgba(167, 139, 250, .12);
+  --accent: #22d3bd;
+  --code-bg: #0b101b;
+  --shadow: 0 8px 30px rgba(0, 0, 0, .35);
+}
+body.light {
+  --bg: #f4f7fb;
+  --panel: #ffffff;
+  --panel2: #eef2f9;
+  --border: #d8e0ee;
+  --text: #1d2635;
+  --muted: #5b6b85;
+  --arduino: #0b8a7c;
+  --arduino-dim: rgba(11, 138, 124, .1);
+  --php: #6d4fd0;
+  --php-dim: rgba(109, 79, 208, .1);
+  --accent: #0b8a7c;
+  --code-bg: #101726;
+  --shadow: 0 8px 24px rgba(20, 40, 80, .12);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  line-height: 1.65; font-size: 16px;
+}
+/* ---------- Topbar ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 18px;
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.topbar h1 { font-size: 1.05rem; margin: 0; letter-spacing: .3px; }
+.topbar .subtitle { color: var(--muted); font-size: .85rem; flex: 1; }
+.topbar button, #menu-toggle {
+  background: var(--panel2); color: var(--text);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 6px 12px; cursor: pointer; font-size: .9rem;
+}
+#menu-toggle { display: none; margin-right: 4px; }
+/* ---------- Layout ---------- */
+.layout { display: flex; min-height: calc(100vh - 53px); }
+#sidebar {
+  width: 280px; flex-shrink: 0;
+  position: sticky; top: 53px; height: calc(100vh - 53px);
+  overflow-y: auto; padding: 14px;
+  background: var(--panel); border-right: 1px solid var(--border);
+}
+#sidebar::-webkit-scrollbar { width: 8px; }
+#sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+#search {
+  width: 100%; padding: 9px 12px; margin-bottom: 12px;
+  background: var(--panel2); color: var(--text);
+  border: 1px solid var(--border); border-radius: 10px; outline: none;
+  font-size: .9rem;
+}
+#search:focus { border-color: var(--accent); }
+.nav-group h3 {
+  font-size: .72rem; text-transform: uppercase; letter-spacing: 1.4px;
+  color: var(--muted); margin: 16px 4px 6px;
+}
+.nav-group h3.arduino { color: var(--arduino); }
+.nav-group h3.php { color: var(--php); }
+#nav a {
+  display: block; padding: 6px 10px; margin: 2px 0;
+  color: var(--text); text-decoration: none;
+  font-size: .86rem; border-radius: 8px; border-left: 3px solid transparent;
+}
+#nav a:hover { background: var(--panel2); }
+#nav a.active {
+  background: var(--panel2); border-left-color: var(--accent);
+  font-weight: 600;
+}
+#nav a .src {
+  display: block; font-size: .7rem; color: var(--muted); font-weight: 400;
+}
+#no-results { color: var(--muted); font-size: .85rem; padding: 10px; display: none; }
+/* ---------- Contenido ---------- */
+#content { flex: 1; padding: 28px 34px 90px; max-width: 980px; margin: 0 auto; }
+.topic {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 16px; padding: 26px 30px; margin-bottom: 26px;
+  box-shadow: var(--shadow); scroll-margin-top: 70px;
+}
+.topic.arduino { border-top: 3px solid var(--arduino); }
+.topic.php { border-top: 3px solid var(--php); }
+.topic h2 {
+  margin: 0 0 4px; font-size: 1.45rem; letter-spacing: -.3px;
+}
+.topic h3 { font-size: 1.05rem; margin: 22px 0 8px; color: var(--accent); }
+.topic.arduino h3 { color: var(--arduino); }
+.topic.php h3 { color: var(--php); }
+.badge {
+  display: inline-block; font-size: .72rem; font-weight: 700;
+  padding: 3px 10px; border-radius: 999px; margin-bottom: 12px;
+  letter-spacing: .4px;
+}
+.badge.arduino { background: var(--arduino-dim); color: var(--arduino); }
+.badge.php { background: var(--php-dim); color: var(--php); }
+.topic p { margin: 10px 0; }
+.topic ul, .topic ol { margin: 8px 0; padding-left: 22px; }
+.topic li { margin: 5px 0; }
+.topic strong { color: var(--text); }
+.muted { color: var(--muted); font-size: .9rem; }
+.note {
+  border-left: 3px solid var(--accent); background: var(--panel2);
+  padding: 10px 14px; border-radius: 0 10px 10px 0; margin: 14px 0; font-size: .92rem;
+}
+.note.warn { border-left-color: #f59e0b; }
+.formula {
+  font-family: "Cambria Math", Georgia, serif; font-size: 1.25rem;
+  text-align: center; padding: 12px; margin: 12px 0;
+  background: var(--panel2); border-radius: 10px; border: 1px dashed var(--border);
+}
+/* ---------- Tablas ---------- */
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: .92rem; }
+th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+th { background: var(--panel2); color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .6px; }
+/* ---------- Bloques de código ---------- */
+.codeblock {
+  margin: 16px 0; border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden; background: var(--code-bg);
+}
+.code-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 7px 14px; background: rgba(255, 255, 255, .05);
+  border-bottom: 1px solid var(--border);
+  font-size: .75rem; color: #9fb2d0; text-transform: uppercase; letter-spacing: 1px;
+}
+.code-head .copy {
+  background: rgba(255, 255, 255, .08); color: #cfe0f5;
+  border: 1px solid rgba(255, 255, 255, .14); border-radius: 7px;
+  padding: 4px 12px; cursor: pointer; font-size: .75rem; letter-spacing: .4px;
+}
+.code-head .copy:hover { background: rgba(255, 255, 255, .16); }
+.codeblock pre { margin: 0; padding: 16px 18px; overflow-x: auto; }
+.codeblock code {
+  font-family: "Cascadia Code", Consolas, "Courier New", monospace;
+  font-size: .88rem; line-height: 1.6; color: #e3ecfa; white-space: pre;
+}
+.cmt { color: #6ea88f; font-style: italic; } /* color de comentario en código */
+/* ---------- Foro ---------- */
+details.foro {
+  margin-top: 16px; background: var(--panel2);
+  border: 1px solid var(--border); border-radius: 12px; padding: 10px 16px;
+}
+details.foro summary { cursor: pointer; font-weight: 600; font-size: .92rem; color: var(--muted); }
+details.foro ul { font-size: .92rem; }
+/* ---------- Hero ---------- */
+.hero {
+  text-align: center; padding: 34px 20px 10px;
+}
+.hero h2 { font-size: 2rem; margin: 0 0 8px; }
+.hero p { color: var(--muted); max-width: 640px; margin: 8px auto; }
+.hero .chips { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+.chip {
+  padding: 7px 16px; border-radius: 999px; font-size: .85rem; font-weight: 600;
+  border: 1px solid var(--border); background: var(--panel2); text-decoration: none; color: var(--text);
+}
+.chip.a { color: var(--arduino); border-color: var(--arduino); }
+.chip.p { color: var(--php); border-color: var(--php); }
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  #menu-toggle { display: block; }
+  #sidebar {
+    position: fixed; left: -300px; z-index: 60; transition: left .25s;
+    height: 100vh; top: 0;
+  }
+  #sidebar.open { left: 0; box-shadow: var(--shadow); }
+  #content { padding: 20px 16px 70px; }
+}
